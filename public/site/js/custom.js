@@ -14,4 +14,15 @@ $(document).ready(function() {
            $('.tab-content .tab-pane:nth-child('+ nthChild +')').addClass('active');
        }
    })
+
+
+
+$('.color-picker').on('click', function() {
+	$parent_box = $(this).closest('.color-pickerPopup');
+	$parent_box.siblings().find('.popup-overlay').hide();
+	$parent_box.find('.popup-overlay').toggle();
+});
+$(".closeX").click(function(e) {
+  $(".popup-overlay").hide();
+});
 })

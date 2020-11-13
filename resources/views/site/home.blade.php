@@ -1,4 +1,22 @@
 @extends('layouts.site.app') 
+@section('styles')
+<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}  
+.sp-dd{
+    display: none;
+}
+</style>
+@endsection
 @section('content')
 <section class="maker-container">
     <div class="maker-rhs-container">
@@ -27,28 +45,57 @@
                             <br>
                             <p class="color-inputpicker">
                                 <input type="text" id="font-color-input" class="input-text" placeholder="#000000">
-                                <span> 
-                                    <input type="text" id="font-color-picker" value="ffffff">
-                                </span>
+                                <span></span>
                                 
-                                {{-- <span id="" style="background-color: #ff0000;"></span> --}}
+                                
+                                {{-- <span id="font-slider" style="background-color: #ff0000;"></span> --}}
                             </p>
                             
                             <p class="color-inputpicker">
                                 <h3>FONT SIZE (PX)</h3>
-                                <input type="range" id="font-slider" class="range-slider" min="1" max="50" value="25">
-                                <input type="text" id="fontpx" class="input-text input-count" placeholder="35">
+                                <input type="range" id="font-slider" class="fontsize range-slider" min="1" max="200" value="10">
+                                <input type="number" id="fontpx" class="fontsize input-text input-count" min="1" max="200" placeholder="35">
                             </p>
                             
                             <label class="checkbox-container">Font Outline
                               <input type="checkbox" id="text-outline" >
                               <span class="checkmark"></span>
                             </label>
-                            {{-- <span id="" class="color-picker" style="background-color: #ff0000;"></span><br/> --}}
+                            <br/>
+                            
                             <div id="outline_fields" style="display: none">
-
-                            <input type='text' id="outline-color" value="rgb(255, 0, 0)" />
-                            <input type="range" id="outline-slider" class="range-slider" min="1" max="50" value="25">
+                                <div class="color-pickerPopup">
+                                    <span id="picker1" class="color-picker picker" style="background-color: #ff0000;"></span>
+                                    <div class="popup-overlay" style="display: none;">
+                                        <div class="popup-content">
+                                            <p class="mb-1">Recommended Color</p>
+                                            <input class="color-picker add-color"  value="rgb(255, 0, 0)" style="background-color: rgb(255, 255, 255);" type='text' id="outline-color" />
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(250, 125, 127);" style="background-color: rgb(250, 125, 127);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(129, 5, 10);" style="background-color: rgb(129, 5, 10);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(148, 6, 13);" style="background-color: rgb(148, 6, 13);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(147, 7, 13);" style="background-color: rgb(147, 7, 13);"></span>
+                                            
+                                    
+                                            
+                                            <p class="mt-4 mb-1">Default Color</p>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(0, 0, 0);" style="background-color: rgb(0, 0, 0);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(84, 84, 85);" style="background-color: rgb(84, 84, 85);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(115, 115, 115);" style="background-color: rgb(115, 115, 115);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(165, 165, 165);" style="background-color: rgb(165, 165, 165);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(217, 217, 216);" style="background-color: rgb(217, 217, 216);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(255, 255, 255);" style="background-color: rgb(255, 255, 255);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(253, 89, 92);" style="background-color: rgb(253, 89, 92);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(252, 106, 195);" style="background-color: rgb(252, 106, 195);"></span>
+                                            <span id="" class="color-picker outline-color-picker" data-color="rgb(202, 113 228);" style="background-color: rgb(202, 113 228);"></span>
+                                            
+                                            
+                                            
+                                            <br/>
+                                        </div>
+                                        <button>Done</button>
+                                    </div>
+                                </div> 
+                                <input type="range" id="outline-slider" class="range-slider" min="1" max="50" value="2">
                             
                             <p>&nbsp;</p>
                             </div>
@@ -60,14 +107,46 @@
                             
                             {{-- <span id="shadow-color" class="color-picker" style="background-color: #ff0000;"></span><br/> --}}
                             <div id="shadow_fields" style="display: none">
-                                <input type='text' class="textshadow" id="shadow-color" value="rgb(255, 0, 0)" />
+                                <div class="color-pickerPopup">
+                                    <span id="picker2" class="color-picker picker" style="background-color: #ff0000;"></span>
+                                    <div class="popup-overlay">
+                                        <div class="popup-content">
+                                            <button class="closeX">X</button> 
+                                            <p class="mb-1">Recommended Color</p>
+                                            <input type='text' class="color-picker  textshadow"value="rgb(255, 0, 0)" id="shadow-color" style="background-color: rgb(255, 255, 255);" />
+                                            
+                                            <span id="" class="shadow-color-picker color-picker add-color"  ></span>
+                                            <span id="" class="shadow-color-picker color-picker"   style="background-color: rgb(250, 125, 127);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"   style="background-color: rgb(129, 5, 10);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"   style="background-color: rgb(148, 6, 13);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"   style="background-color: rgb(147, 7, 13);"></span>
+                                            
+                                            
+                                            <p class="mt-4 mb-1">Default Color</p>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(0, 0, 0);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(84, 84, 85);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(115, 115, 115);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(165, 165, 165);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(217, 217, 216);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(255, 255, 255);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(253, 89, 92);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(252, 106, 195);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(202, 113 228);"></span>
+                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(139, 91, 251);"></span>
+                                            
+                                            
+                                              
+                                        </div>
+                                        <button>Done</button>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-lg-4 pt-2">
                                         <p class="mb-0">SPREAD</p>
                                     </div>
                                     <div class="col-lg-8">
-                                    <input type="range" id="spread-slider" class="textshadow range-slider" min="1" max="50" value="3"> 
-                                    <input type="text" id="spread-input" class="input-text input-count" placeholder="35">
+                                    <input type="range" id="spread-slider" class="spread textshadow range-slider" min="1" max="50" value="3"> 
+                                    <input type="number" id="spread-input" class="spread input-text input-count" placeholder="35">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -75,8 +154,8 @@
                                         <p class="mb-0">DISTANCE - X</p>
                                     </div>
                                     <div class="col-lg-8">
-                                    <input type="range" id="distance-x-slider" class="textshadow range-slider" min="1" max="50" value="25"> 
-                                    <input type="text" id="distance-x-input" class="input-text input-count" placeholder="35">
+                                    <input type="range" id="distance-x-slider" class="distance-x textshadow range-slider" min="1" max="400" value="25"> 
+                                    <input type="number" id="distance-x-input" class="distance-x input-text input-count" placeholder="35">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -84,8 +163,8 @@
                                         <p class="mb-0">DISTANCE - Y</p>
                                     </div>
                                     <div class="col-lg-8">
-                                    <input type="range" id="distance-y-slider" class="textshadow range-slider" min="1" max="50" value="25"> 
-                                    <input type="text" id="istance-y-input" class="input-text input-count" placeholder="35">
+                                    <input type="range" id="distance-y-slider" class="distance-y textshadow range-slider" min="1" max="400" value="25"> 
+                                    <input type="number" id="distance-y-input" class="distance-y input-text input-count" placeholder="35">
                                     </div>
                                 </div>
                             </div>
@@ -325,6 +404,29 @@ $("#outline-color").spectrum({
 $("#font-color-picker").spectrum({
     color: "black"
 });
+$('#text-shadow').on('click',function(){
+        
+        $('#shadow_fields').slideToggle();
+});
+ $('#text-outline').on('click',function(){
+        
+        $('#outline_fields').slideToggle();
+ });
+ $('.spread').on('keyup  change' , function(e) {
+         let spread=$(this).val();  
+        $('#spread-slider').val(spread);
+        $('#spread-input').val(spread); 
+ });
+ $('.distance-x').on('keyup  change' , function(e) {
+         let distanceX=$(this).val();  
+        $('#distance-x-slider').val(distanceX);
+        $('#distance-x-input').val(distanceX); 
+ });
+ $('.distance-y').on('keyup  change' , function(e) {
+         let distanceY=$(this).val();  
+        $('#distance-y-slider').val(distanceY);
+        $('#distance-y-input').val(distanceY); 
+ });
 
 </script>
 <script>
@@ -341,96 +443,81 @@ var canvas = new fabric.Canvas('c',{backgroundColor : "white"});
     
     
 var active;
-$("#text_btn").on("click", function(e) {
-text = new fabric.IText(
-          $('#text_field').val(), { 
-          left: 100, 
-          top: 100,    
-          objectCaching:false  });
+    $("#text_btn").on("click", function(e) {
+    text = new fabric.IText(
+            $('#text_field').val(), { 
+            left: 100, 
+            top: 100,    
+            objectCaching:false  });
 
-      canvas.add(text);
-      canvas.setActiveObject(text);
-});
-
-/** Load Font Families **/
-
-
-$('#font-family').fontselect();
-  $('.font-select').on('keyup', '.fs-search-input' , function() {
-    var input, filter, ul, li, a, i, txtValue;
-    filter = $(this).val().toUpperCase();
-    ul = document.getElementById("fa-result-ul");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-
-      txtValue = li[i].textContent || li[i].innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
-      }
-    }
-  });
-  
-  $(document).on('change', '#outline-slider , #text-outline',function(){ 
-      let outlineColor=$("#outline-color").val();
-      let outlineSlider=$('#outline-slider').val();
-           
-
-            if($('#text-outline').is(":checked")){ 
-                let o = Color(outlineColor); 
-                 active = canvas.getActiveObject(); 
-                // console.log(active.get('type'));
-                if(active.get('type')=='i-text'){
-                   active.stroke=o.toString(); 
-                   active.strokeWidth=outlineSlider;
-                   canvas.renderAll();    
-                   console.log(active); 
+        canvas.add(text);
+        canvas.setActiveObject(text);
+    });
+    //  Stroke 
+    $('.outline-color-picker').on('click' , function() {
+            let fieldtype= $(this).prop("tagName");
+            let outlineSlider=$('#outline-slider').val();
+            active = canvas.getActiveObject(); 
+            if($('#text-outline').is(":checked")){  
+                if(fieldtype=="SPAN"){
+                    fontcolor= $(this).css("background-color");
+                    $('#picker1').css("background-color",fontcolor);
+                    
+                    if(active.get('type')=='i-text'){
+                        // console.log(fontcolor); 
+                        active.stroke=fontcolor; 
+                    active.strokeWidth=outlineSlider;
+                        canvas.renderAll();
+                    }
                 }
-                
-               
+            }else if($('#text-outline').is(":not(:checked)")){
+                    console.log("Checkbox is unchecked.");
+                    active = canvas.getActiveObject(); 
+                    if(active.get('type')=='i-text'){
+                    active.stroke=null; 
+                    active.strokeWidth=null;
+                    canvas.renderAll();    
+                    console.log(canvas); 
+                    }
+                    
             }
-            else if($('#text-outline').is(":not(:checked)")){
-                console.log("Checkbox is unchecked.");
-                active = canvas.getActiveObject(); 
-                if(active.get('type')=='i-text'){
-                   active.stroke=null; 
-                   active.strokeWidth=null;
-                   canvas.renderAll();    
-                   console.log(canvas); 
+    });
+    $(document).on('change', '#outline-slider ,#outline-color, #text-outline',function(){ 
+        let outlineColor=$("#outline-color").val();
+        let outlineSlider=$('#outline-slider').val();
+        $('#picker1').css("background-color",outlineColor); 
+                if($('#text-outline').is(":checked")){ 
+                    let o = Color(outlineColor); 
+                    active = canvas.getActiveObject(); 
+                    // console.log(active.get('type'));
+                    if(active.get('type')=='i-text'){
+                    active.stroke=o.toString(); 
+                    active.strokeWidth=outlineSlider;
+                    canvas.renderAll();    
+                    console.log(active); 
+                    } 
                 }
-                
-            }
-    
-
- });
-
-  $('#font-slider').on('change' , function(e) {
-    active = canvas.getActiveObject();
-    console.log(active.get('type'));
-    if(active.get('type')=='i-text'){
+                else if($('#text-outline').is(":not(:checked)")){
+                    console.log("Checkbox is unchecked.");
+                    active = canvas.getActiveObject(); 
+                    if(active.get('type')=='i-text'){
+                    active.stroke=null; 
+                    active.strokeWidth=null;
+                    canvas.renderAll();    
+                    console.log(canvas); 
+                    }
+                    
+                }
         
-        let font_Size=$(this).val();
-        active.set("fontSize",font_Size);
-        $('#fontpx').val(font_Size);
-        canvas.renderAll();
-    }
-  });
 
- $('#text-shadow').on('click',function(){
-        
-        $('#shadow_fields').slideToggle();
- });
- $('#text-outline').on('click',function(){
-        
-        $('#outline_fields').slideToggle();
- });
- $(document).on('change','.textshadow', function(){
+    });
+    // shadow
+    $(document).on('change','.textshadow', function(){
             let shadowColor=$("#shadow-color").val();
             let shadowSpread=$('#spread-slider').val();
             let shadowDistanceX=$('#distance-x-slider').val();
-            let shadowDistanceY=$('#distance-y-slider').val();
-
+            let shadowDistanceY=$('#distance-y-slider').val(); 
+            $('#picker2').css("background-color",shadowColor); 
             $('#spread-input').val(shadowSpread);
             $('#distance-y-input').val(shadowDistanceX);
             $('#distance-y-input').val(shadowDistanceY);
@@ -454,9 +541,6 @@ $('#font-family').fontselect();
                    
                     active.shadow=shadow;  
                     canvas.renderAll();
-
-
-
                 }
                 
                
@@ -464,12 +548,68 @@ $('#font-family').fontselect();
                 console.log("Checkbox is unchecked.");
                 active.shadow=null;
                 canvas.renderAll();
-
                 
             }
     
+    });
+    // 
+    $(document).on('click','.shadow-color-picker', function(){
+            let shadowColor=$(this).css("background-color");
+            let shadowSpread=$('#spread-slider').val();
+            let shadowDistanceX=$('#distance-x-slider').val();
+            let shadowDistanceY=$('#distance-y-slider').val();
+            $('#picker2').css("background-color",shadowColor);  
+            $('#spread-input').val(shadowSpread);
+            $('#distance-y-input').val(shadowDistanceX);
+            $('#distance-y-input').val(shadowDistanceY);
+          
+         
+            if($('#text-shadow').is(":checked")){
+                let c = Color(shadowColor)
+                console.log("Checkbox is checked.");
+                console.log(c.toString());
+                active = canvas.getActiveObject(); 
+                console.log(active);
+                
+                if(active.get('type')=='i-text'){
+                    var shadow = new fabric.Shadow({ 
+                        color: c.toString(), 
+                        blur : shadowSpread,
+                        offsetX: shadowDistanceX,
+                        offsetY: shadowDistanceY, 
+                         });
+                   
+                    active.shadow=shadow;  
+                    canvas.renderAll();
+                }
+                
+               
+            } else if($(this).is(":not(:checked)")){
+                console.log("Checkbox is unchecked.");
+                active.shadow=null;
+                canvas.renderAll();
+                
+            }
+    
+    });
 
- });
+    $('.fontsize').on('keyup  change' , function(e) {
+        active = canvas.getActiveObject();
+        let font_Size=$(this).val(); 
+        if(font_Size>200){
+            font_Size=200;
+        }
+        $('#font-slider').val(font_Size);
+        $('#fontpx').val(font_Size);
+        if(active.get('type')=='i-text'){
+            
+            active.set("fontSize",font_Size);
+            $('#fontpx').val(font_Size);
+            canvas.renderAll();
+        }
+    });
+
+ 
 
   $('#font-family').on('change' , function() {
     active = canvas.getActiveObject();
@@ -480,7 +620,9 @@ $('#font-family').fontselect();
     }
 
   });
-  $('#font-color-picker').on('change' , function() {
+
+  $('.color-picke1r').on('click' , function() {
+      console.log($(this).data("data-type"));
       let fontColorPicker=$('#font-color-picker').spectrum("get");
       let fontColorInput=$('#font-color-input').val();
     //   if (fontColorInput.match(/^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/)) {
@@ -497,34 +639,7 @@ $('#font-family').fontselect();
     
   });
 
-
-  
-//   document.getElementById('font-family').onchange = function() {
-//   if (this.value !== 'Times New Roman') {
-//     loadAndUse(this.value);
-//   } else {
-//     canvas.getActiveObject().set("fontFamily", this.value);
-//     canvas.requestRenderAll();
-//   }
-// };
-
-  
-
-// // create a rectangle object
-// var rect = new fabric.Rect({
-//   left: 100,
-//   top: 100,
-//   fill: 'red',
-//   width: 20,
-//   height: 20
-// });
-
-// // "add" rectangle onto canvas
-// canvas.add(rect);
-
-
-
-
+ 
 </script>
 @endsection
 @endsection
