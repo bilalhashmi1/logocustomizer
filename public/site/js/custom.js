@@ -18,6 +18,7 @@ $(document).ready(function() {
 
 
 $('.color-picker').on('click', function() {
+    $('.popup-overlay').hide();
 	$parent_box = $(this).closest('.color-pickerPopup');
 	$parent_box.siblings().find('.popup-overlay').hide();
 	$parent_box.find('.popup-overlay').toggle();
@@ -25,4 +26,43 @@ $('.color-picker').on('click', function() {
 $(".closeX").click(function(e) {
   $(".popup-overlay").hide();
 });
+$('.done').on('click', function() {
+    $('.popup-overlay').hide();
+});
+
+   
+$("#shadow-color").spectrum({
+    color: "rgb(4, 0, 0)"
+});
+$("#outline-color").spectrum({
+    color: "#f00" 
+});
+$("#font-color-picker").spectrum({
+    color: "black"
+});
+$('#text-shadow').on('click',function(){
+        
+        $('#shadow_fields').slideToggle();
+});
+ $('#text-outline').on('click',function(){
+        
+        $('#outline_fields').slideToggle();
+ });
+ $('.spread').on('keyup  change' , function(e) {
+         let spread=$(this).val();  
+        $('#spread-slider').val(spread);
+        $('#spread-input').val(spread); 
+ });
+ $('.distance-x').on('keyup  change' , function(e) {
+         let distanceX=$(this).val();  
+        $('#distance-x-slider').val(distanceX);
+        $('#distance-x-input').val(distanceX); 
+ });
+ $('.distance-y').on('keyup  change' , function(e) {
+         let distanceY=$(this).val();  
+        $('#distance-y-slider').val(distanceY);
+        $('#distance-y-input').val(distanceY); 
+ });
+
+
 })
