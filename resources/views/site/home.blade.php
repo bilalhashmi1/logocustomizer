@@ -25,19 +25,115 @@ input[type=number] {
     width: 100%;
     object-fit: contain;
 }
-.color-picker-wrapper{
+        .k-slider-track{
+			width:100% !important;
+
+		}
+		.k-flatcolorpicker .k-color-value {
+			margin: 0 35px 0 0;
+		}
+		.k-selected-color-display {
+    		border-radius: 5px;
+        }
+        .k-flatcolorpicker :nth-child(1) { order: 3; }
+        .k-flatcolorpicker :nth-child(2) { order: 1; }
+        .k-flatcolorpicker :nth-child(3) { order: 2; }
+        .k-flatcolorpicker :nth-child(4) { order: 4; }
+        
+        .k-flatcolorpicker .k-controls {
+    
+            padding-bottom: 5px;
+        }
+        .k-button.k-primary.apply{color:#000;padding:0.2rem 2.5rem;margin:0 5px;border:1px solid #8d8d8d;background:#fff}
+.k-button.k-primary.apply:hover{background:#efefef;color:#000}
+.k-button.cancel{color:#000;padding:0.2rem 2.5rem;margin:0 5px;border:1px solid #8d8d8d;background:#fff}
+.k-button.cancel:hover{background:#efefef;color:#000}
+
+/* .color-picker-wrapper{
     display: inline;
 }
-.color-picker-wrapper .sp-replacer.sp-light{
+.color-inputpicker .sp-replacer.sp-light{
     POSITION: ABSOLUTE;
     Z-INDEX: 999;
     BACKGROUND-COLOR: TRANSPARENT;
     BORDER: 0;
     height: 35px;
+    top: 0;
+    right: 0;
 }
-.color-picker-wrapper .sp-preview{
+.color-inputpicker .sp-preview{
     visibility: hidden;
 }
+.color-pickerPopup{
+    position: relative;
+}
+.color-pickerPopup .sp-replacer.sp-light {
+    position: absolute;
+    Z-INDEX: 999;
+    BACKGROUND-COLOR: TRANSPARENT;
+    BORDER: 0;
+    top: 0;
+    height: 35px;
+}
+.color-pickerPopup  .sp-preview{
+    visibility: hidden;
+}
+
+button.sp-choose{
+    padding: 5px 28px 5px 28px;
+
+}
+a.sp-cancel {
+    font:  normal 12px "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+    text-decoration: none;
+    background-color: #eee;
+    background-image: -webkit-linear-gradient(top,#eee,#ccc); 
+    background-image: -moz-linear-gradient(top,#eee,#ccc);
+    background-image: -ms-linear-gradient(top,#eee,#ccc);
+    background-image: -o-linear-gradient(top,#eee,#ccc);
+    background-image: linear-gradient(to bottom,#eee,#ccc);
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #bbb;
+    border-radius: 3px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1;
+    padding: 2px 28px 2px 28px;
+    text-align: center;
+    text-shadow: 0 1px 0 #eee;
+    vertical-align: middle;
+} */
+.canvas_frame{
+    width:50%;
+    height:100%;
+}
+@media only screen and (max-width: 1024px) {
+  .canvas_frame {
+    width:500px;
+    height:500px;
+  }
+}
+@media only screen and (max-width: 565px) {
+  .canvas_frame {
+
+    width:100%;
+    height:400px;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .canvas_frame {
+
+    width:100%;
+    height:300px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+	 .canvas_frame {
+    width: 500px;
+    height:100%;
+}
+  }
+  
 </style>
 @endsection
 @section('content')
@@ -65,60 +161,49 @@ input[type=number] {
                             <button title="Add text" id="compile" class="btn btn-secondary">See option ></button>
                             <br>
                             <div class="font-style-picker">
-                            <p class="color-inputpicker">
-                                <input type="text" id="font-color-input" class="font-color-input input-text" placeholder="#000000">
                                 <div class="color-pickerPopup">
-                                    <span id="picker0" class="color-picker picker" style="background-color: black;"></span>
-                                    <div id="popup-overlay1" class="popup-overlay" style="display: none;">
-                                        <div class="popup-content">
-                                            {{-- <button class="closeX">X</button>  --}}
-                                            <p class="mb-1">New Color</p>
-                                            <div class="color-picker-wrapper">
-                                            <input class="color-picker add-color "  value="rgb(255, 0, 0)" style="background-color: rgb(255, 255, 255);" type='text' id="font-color-picker" />
-                                                <span id="" class="text-color-picker color-picker add-color"  ></span>       
-                                            </div>
-                                            <p class="mb-1">Recommended Color</p>
+                                    <p class="color-inputpicker">
+                                        <input id="font-color-input" type="text" class="input-text" placeholder="#000000">
+                                     
+                                        <span id="picker0" class="color-picker picker" style="background-color: #000000;"></span>
+                                    </p>
+									
+									<div class="popup-overlay">
+										<div class="popup-content">
+                                            <div id="textfontcolor">
+												 
 
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(250, 125, 127);" style="background-color: rgb(250, 125, 127);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(129, 5, 10);" style="background-color: rgb(129, 5, 10);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(148, 6, 13);" style="background-color: rgb(148, 6, 13);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(147, 7, 13);" style="background-color: rgb(147, 7, 13);"></span>
-                                            
-                                    
-                                            
-                                            <p class="mt-4 mb-1">Default Color</p>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(0, 0, 0);" style="background-color: rgb(0, 0, 0);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(84, 84, 85);" style="background-color: rgb(84, 84, 85);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(115, 115, 115);" style="background-color: rgb(115, 115, 115);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(165, 165, 165);" style="background-color: rgb(165, 165, 165);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(217, 217, 216);" style="background-color: rgb(217, 217, 216);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(255, 255, 255);" style="background-color: rgb(255, 255, 255);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(253, 89, 92);" style="background-color: rgb(253, 89, 92);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(252, 106, 195);" style="background-color: rgb(252, 106, 195);"></span>
-                                            <span id="" class="color-picker text-color-picker" data-color="rgb(202, 113 228);" style="background-color: rgb(202, 113 228);"></span>
-                                            
-                                            
-                                            
-                                            <br/>
-                                            <p class="mt-4 mb-1">Gradient Color</p>
-											<span id="" class="color-picker text-gradient" data-color1="rgb(252, 227, 138)" data-color2="rgb(243, 129, 129)"  style="background: linear-gradient(rgb(252, 227, 138), rgb(243, 129, 129));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="rgb(248, 77, 158)" data-color2="rgb(255, 116, 117)"  style="background: linear-gradient(rgb(248, 77, 158), rgb(255, 116, 117));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="rgb(23, 234, 217)" data-color2="rgb(96, 120, 234)"  style="background: linear-gradient(rgb(23, 234, 217), rgb(96, 120, 234));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="(rgb(98, 39, 116)" data-color2="rgb(197, 51, 100)"  style="background: linear-gradient(rgb(98, 39, 116), rgb(197, 51, 100));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="rgb(113, 23, 234)" data-color2="rgb(234, 96, 96)"  style="background: linear-gradient(rgb(113, 23, 234), rgb(234, 96, 96));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="rgb(180, 236, 81)" data-color2="rgb(66, 147, 33)"  style="background: linear-gradient(rgb(180, 236, 81), rgb(66, 147, 33));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="rgb(250, 217, 97)" data-color2="rgb(247, 107, 28)"  style="background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="(rgb(245, 81, 95)" data-color2="rgb(159, 4, 27)"  style="background: linear-gradient(rgb(245, 81, 95), rgb(159, 4, 27));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="(rgb(48, 35, 174)" data-color2="rgb(200, 109, 215)"  style="background: linear-gradient(rgb(48, 35, 174), rgb(200, 109, 215));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="rgb(66, 230, 149)" data-color2="rgb(59, 178, 184)"  style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="(rgb(91, 36, 122)" data-color2="rgb(27, 206, 223)"  style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
-											<span id="" class="color-picker text-gradient" data-color1="gb(101, 121, 155)" data-color2="rgb(94, 37, 99)"  style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
-										
-                                        </div>
-                                        <button class="done">Done</button>
-                                    </div>
-                                </div>
-                            </p>
+												<div class="demo-section k-content">
+													<div class="box-col">
+														 
+														<div id="flatcolorpicker" data-role="flatcolorpicker"></div>      
+													</div>
+                                                <div class="gradient-color">
+                                                    <p class="mt-4 mb-1">Gradient Color</p>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(252, 227, 138)" data-color2="rgb(243, 129, 129)" style="background: linear-gradient(rgb(252, 227, 138), rgb(243, 129, 129));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(248, 77, 158)" data-color2="rgb(255, 116, 117)" style="background: linear-gradient(rgb(248, 77, 158), rgb(255, 116, 117));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(23, 234, 217)" data-color2="rgb(96, 120, 234)" style="background: linear-gradient(rgb(23, 234, 217), rgb(96, 120, 234));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(98, 39, 116)" data-color2="rgb(197, 51, 100)" style="background: linear-gradient(rgb(98, 39, 116), rgb(197, 51, 100));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(113, 23, 234)" data-color2="rgb(234, 96, 96)" style="background: linear-gradient(rgb(113, 23, 234), rgb(234, 96, 96));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(180, 236, 81)" data-color2="rgb(66, 147, 33)" style="background: linear-gradient(rgb(180, 236, 81), rgb(66, 147, 33));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(250, 217, 97)" data-color2="rgb(247, 107, 28)" style="background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(245, 81, 95)" data-color2="rgb(159, 4, 27)" style="background: linear-gradient(rgb(245, 81, 95), rgb(159, 4, 27));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(48, 35, 174)" data-color2="rgb(200, 109, 215)" style="background: linear-gradient(rgb(48, 35, 174), rgb(200, 109, 215));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(66, 230, 149)" data-color2="rgb(59, 178, 184)" style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(91, 36, 122)" data-color2="rgb(27, 206, 223)" style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
+                                                    <span class="color-picker text-gradient" data-color1="rgb(101, 121, 155)" data-color2="rgb(94, 37, 99)" style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
+</div>
+												<p class="text-center mt-3">
+                                                    <button class="btn btn-primary donebtn">DONE</button>
+                                                    <button class="btn btn-primary donebtn cancel">CANCEL</button>
+												</p>
+                                                </div>
+                                                
+											</div>
+											 
+										</div>
+									</div>
+								</div>
                         </div>
                             
                             <p class="color-inputpicker">
@@ -130,6 +215,7 @@ input[type=number] {
                                 <div class="checkbox-container">
                                 <label class="checkbox-label">Font Outline
                                 <input type="checkbox" id="text-outline" >
+                                
                                 <span class="checkmark"></span></label>
                                 </div>
                             </div>
@@ -140,44 +226,12 @@ input[type=number] {
                               <div id="outline_fields" style="display: none;">
                                 <div class="row">
                                         <div class="color-pickerPopup">
-                                    <div class="col-md-2 col-sm-2"> 
-                                        <span id="picker1" class="color-picker picker" style="background-color: #ff0000;"></span>
-                                    </div> 
+                                            <div class="col-md-2 col-sm-2">  
+                                                <input class="color-picker add-color"  value="rgb(255, 0, 0)" style="background-color: rgb(255, 255, 255);" type='text' id="outline-color" />
 
-                                            <div class="popup-overlay" style="display: none;">
-                                                <div class="popup-content">
-                                                    {{-- <button class="closeX">X</button>  --}}
-                                                    <p class="mb-1">New Color</p>
-                                                    <div class="color-picker-wrapper">
-                                                        <input class="color-picker add-color"  value="rgb(255, 0, 0)" style="background-color: rgb(255, 255, 255);" type='text' id="outline-color" />
-                                                        <span id="" class="shadow-color-picker color-picker add-color"  ></span>       
-                                                    </div>
-                                                    <p class="mb-1">Recommended Color</p>
+                                            </div> 
 
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(250, 125, 127);" style="background-color: rgb(250, 125, 127);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(129, 5, 10);" style="background-color: rgb(129, 5, 10);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(148, 6, 13);" style="background-color: rgb(148, 6, 13);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(147, 7, 13);" style="background-color: rgb(147, 7, 13);"></span>
-                                                    
-                                            
-                                                    
-                                                    <p class="mt-4 mb-1">Default Color</p>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(0, 0, 0);" style="background-color: rgb(0, 0, 0);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(84, 84, 85);" style="background-color: rgb(84, 84, 85);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(115, 115, 115);" style="background-color: rgb(115, 115, 115);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(165, 165, 165);" style="background-color: rgb(165, 165, 165);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(217, 217, 216);" style="background-color: rgb(217, 217, 216);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(255, 255, 255);" style="background-color: rgb(255, 255, 255);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(253, 89, 92);" style="background-color: rgb(253, 89, 92);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(252, 106, 195);" style="background-color: rgb(252, 106, 195);"></span>
-                                                    <span id="" class="color-picker outline-color-picker" data-color="rgb(202, 113 228);" style="background-color: rgb(202, 113 228);"></span>
-                                                    
-                                                    
-                                                    
-                                                    <br/>
-                                                </div>
-                                                <button class="done">Done</button>
-                                            </div>
+                                             
                                         </div>
                                     <div class="col-md-8 col-sm-8" style="top: 8px;">
                                          <input type="range" id="outline-slider" class="range-slider" min="1" max="30" value="2">
@@ -200,41 +254,13 @@ input[type=number] {
                             
                             {{-- <span id="shadow-color" class="color-picker" style="background-color: #ff0000;"></span><br/> --}}
                             <div id="shadow_fields" style="display: none">
+                                <div class="row">
                                 <div class="color-pickerPopup">
-                                    <span id="picker2" class="color-picker picker" style="background-color: #ff0000;"></span>
-                                    <div class="popup-overlay">
-                                        <div class="popup-content">
-                                            {{-- <button class="closeX">X</button>  --}}
-                                            <p class="mb-1">New Color</p>
-                                            <div class="color-picker-wrapper">
-                                                <input type='text' class="color-picker  textshadow" value="rgb(4, 0, 0)" id="shadow-color" style="background-color: rgb(255, 255, 255);" />
-                                                <span id="" class="shadow-color-picker color-picker add-color"  ></span>    
-                                            </div>
-                                            <p class="mb-1">Recommended Color</p>
-                                           
-                                            <span id="" class="shadow-color-picker color-picker"   style="background-color: rgb(250, 125, 127);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"   style="background-color: rgb(129, 5, 10);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"   style="background-color: rgb(148, 6, 13);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"   style="background-color: rgb(147, 7, 13);"></span>
-                                            
-                                            
-                                            <p class="mt-4 mb-1">Default Color</p>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(0, 0, 0);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(84, 84, 85);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(115, 115, 115);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(165, 165, 165);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(217, 217, 216);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(255, 255, 255);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(253, 89, 92);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(252, 106, 195);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(202, 113 228);"></span>
-                                            <span id="" class="shadow-color-picker color-picker"  style="background-color: rgb(139, 91, 251);"></span>
-                                            
-                                            
-                                              
-                                        </div>
-                                        <button class="done" >Done</button>
-                                    </div>
+                                    <div class="col-md-2 col-sm-2">  
+                                    <input type='text' class="color-picker  textshadow"   id="shadow-color" style="background-color:rgb(4, 0, 0);" />
+
+                                </div>    
+                            </div>    
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4 pt-2">
@@ -470,7 +496,7 @@ input[type=number] {
         <div class="canvas-container">
             <div class="canvas-container-header"><!----></div> 
             <div class="canvas-container-body"><!----> 
-                <div id="canvas_frame" class="canvas_frame maker-canvas-frame mbm canvas-editor" style="width: 50%; height:100%;">
+                <div id="canvas_frame" class="canvas_frame maker-canvas-frame mbm canvas-editor " >
                     <canvas id="c"></canvas>
                     
                 </div>
@@ -497,7 +523,7 @@ input[type=number] {
 
 <script> 
     var gfonts = JSON.parse(gfl);
-      console.log(gfonts.length);
+    //   console.log(gfonts.length);
     WebFont.load({
                 google: { 
                        families: gfonts
@@ -522,8 +548,10 @@ var HideControls = {
   var gfonts = JSON.parse(gfl);
     // create a wrapper around native canvas element (with id="c")
 var canvas = new fabric.Canvas('c',{backgroundColor : "white"});
+
 canvas.setWidth($("#canvas_frame").width());
 canvas.setHeight($("#canvas_frame").height());
+
  var defaultLeft="";
  var defaultTop="";
 text = new fabric.Text(
@@ -593,8 +621,15 @@ canvas.on('object:modified', function(event) {
         event.target._clearCache();
         // console.log('tofixed='+event.target.fontSize.toFixed(0));
         // console.log('scaleX='+event.target.scaleX);
-        
-        $("#font-input, #font-slider").val(event.target.fontSize);
+        console.log('sssssssssss');
+
+        if(finalfontsize==199){
+            $("#font-input, #font-slider").val(200);
+
+            }else{
+        $("#font-input, #font-slider").val(finalfontsize);
+
+            }
         }
     }
 });
@@ -615,23 +650,7 @@ $(document).on('change keyup','#text_field', function(){
     }
  });
 
-$(document).on("click", '.text-gradient',function(e) {
-    
-    let color1 =$(this).data('color1');
-    let color2 =$(this).data('color2');
-    active = canvas.getActiveObject();  
-    if(active.get('type')=='text'){
-        var ctx = canvas.getContext('2d');
-        var gradient = ctx.createLinearGradient( 0, 0,  0, text.height);
-        gradient.addColorStop(0, color1);
-        gradient.addColorStop(0.45, color2);
-        active.fill = gradient;
-        $('#font-color-input').val('');
-        canvas.add(active); 
-        canvas.renderAll();
 
-    }
-});
  var readFile = function(e) {
   inputforupload = e.target;
   readerobj = new FileReader();
@@ -741,17 +760,6 @@ $('#compile').click(function(){
    
 
 });
-$(document).on('click', '.fontname',function(){
-    let fonttext= $(this).data('font');
-    var text = canvas.getActiveObject();
-    // console.log(fonttext);
-   // setStyle(text, 'fontFamily', fonttext);
-    text.fontFamily = fonttext;
-    canvas.renderAll();
-    $('#myModal').modal('hide');
-
-
-});
  
 function setStyle(object, styleName, value) {
   if (object.setSelectionStyles && object.isEditing) {
@@ -768,183 +776,6 @@ function setStyle(object, styleName, value) {
 };
  
     
-    
-    $("#text_btn").on("click", function(e) {
-        let fontfamily=$('#font_select').val();
-
-        text1 = new fabric.Text(
-            'Logo tagline here', { 
-            fontFamily: fontfamily,
-            left: defaultLeft+10, 
-            top: defaultTop+50,  
-            textAlign: 'center',
-            lockUniScaling: true,  
-            objectCaching:false  });
-        // canvas.centerObject(text1);
-        canvas.add(text1);
-        text1.setControlsVisibility(HideControls);
-
-        canvas.setActiveObject(text1);
-    });
-    var fontOutline='rgb(255,0,0)';
-    //  Stroke 
-    $('.outline-color-picker').on('click' , function() {
-            let fieldtype= $(this).prop("tagName");
-            let outlineSlider=$('#outline-slider').val();
-            active = canvas.getActiveObject(); 
-            if($('#text-outline').is(":checked")){  
-                if(fieldtype=="SPAN"){
-                    fontOutline= $(this).css("background-color");
-                    $('#picker1').css("background-color",fontOutline);
-                    
-                    if(active.get('type')=='text'){
-                        // console.log(fontOutline); 
-                        active.stroke=fontOutline; 
-                    active.strokeWidth=outlineSlider;
-                        canvas.renderAll();
-                    }
-                }
-            }else if($('#text-outline').is(":not(:checked)")){
-                    // console.log("Checkbox is unchecked.");
-                    active = canvas.getActiveObject(); 
-                    if(active.get('type')=='text'){
-                    active.stroke=null; 
-                    active.strokeWidth=null;
-                    canvas.renderAll();    
-                    // console.log(canvas); 
-                    }
-                    
-            }
-    });
-    $(document).on('change', '#outline-slider ,#outline-color, #text-outline',function(){ 
-         
-                if($('#text-outline').is(":checked")){ 
-                    active = canvas.getActiveObject(); 
-                    // console.log(active.get('type'));
-                    if(active.get('type')=='text'){
-                        if($(this).prop("id")=='outline-color'){
-                            fontOutline=$("#outline-color").val();
-
-                        }
-                        
-                        let outlineSlider=$('#outline-slider').val();
-                        let o = Color(fontOutline);  
-                        $('#picker1').css("background-color",o.toString());
-                        active.stroke=o.toString(); 
-                        active.strokeWidth=outlineSlider;
-                        canvas.renderAll();    
-                     
-
-                    } 
-                }
-                else if($('#text-outline').is(":not(:checked)")){
-                    // console.log("Checkbox is unchecked.");
-                    active = canvas.getActiveObject(); 
-                    if(active.get('type')=='text'){
-                    active.stroke=null; 
-                    active.strokeWidth=null;
-                    canvas.renderAll();    
-                    // console.log(canvas); 
-                    }
-                    
-                }
-        
-
-    });
-    // shadow
-    var shadowColor='rgb(0,0,0)';
-    $(document).on('change','.textshadow', function(e){
-        let shadowSpread=$('#spread-slider').val();
-        let shadowDistanceX=$('#distance-x-slider').val();
-        let shadowDistanceY=$('#distance-y-slider').val();    
-        let changeID=$(this).attr('id');
-        if(changeID=='spread-input'){
-            let shadowSpread=$(this).val();
-            // console.log(1);
-        }else if(changeID=='distance-x-input'){
-            let shadowDistanceX=$(this).val();
-            // console.log(2);
-
-        }else if(changeID=='distance-y-input'){
-            let shadowDistanceY=$(this).val();
-            // console.log(3);
-
-        } else if(changeID=='shadow-color'){
-            shadowColor=$(this).val();
-             
-        }
-            if($('#text-shadow').is(":checked")){ 
-                 
-                active = canvas.getActiveObject(); 
-                
-                if(active.get('type')=='text'){
-                     
-                    let s = Color(shadowColor);   
-                    $('#picker2').css("background-color",s.toString()); 
-                    $('#spread-input').val(shadowSpread);
-                    $('#distance-y-input').val(shadowDistanceX);
-                    $('#distance-y-input').val(shadowDistanceY);
-                    var shadow = new fabric.Shadow({ 
-                        color: s.toString(), 
-                        blur : shadowSpread,
-                        offsetX: shadowDistanceX,
-                        offsetY: shadowDistanceY, 
-                         });
-                    
-                    active.shadow=shadow;  
-                    canvas.renderAll();
-                }
-                
-               
-            } else if($(this).is(":not(:checked)")){
-                // console.log("Checkbox is unchecked.");
-                active.shadow=null;
-                canvas.renderAll();
-                
-            }
-    
-    });
-    // 
-    $(document).on('click','.shadow-color-picker', function(){
-            
-            
-            
-            if($('#text-shadow').is(":checked")){
-                shadowColor=$(this).css("background-color");
-            let shadowSpread=$('#spread-slider').val();
-            let shadowDistanceX=$('#distance-x-slider').val();
-            let shadowDistanceY=$('#distance-y-slider').val();
-            $('#picker2').css("background-color",shadowColor);  
-            $('#spread-input').val(shadowSpread);
-            $('#distance-y-input').val(shadowDistanceX);
-            $('#distance-y-input').val(shadowDistanceY);
-                let c = Color(shadowColor)
-                // console.log("Checkbox is checked.");
-                // console.log(c.toString());
-                active = canvas.getActiveObject(); 
-                // console.log(active);
-                
-                if(active.get('type')=='text'){
-                    var shadow = new fabric.Shadow({ 
-                        color: c.toString(), 
-                        blur : shadowSpread,
-                        offsetX: shadowDistanceX,
-                        offsetY: shadowDistanceY, 
-                            });
-                    
-                    active.shadow=shadow;  
-                    canvas.renderAll();
-                }
-                
-                
-            } else if($(this).is(":not(:checked)")){
-                console.log("Checkbox is unchecked.");
-                active.shadow=null;
-                canvas.renderAll();
-                
-            }
-
-    });
 
     $('.fontsize').on('keyup  change' , function(e) {
         active = canvas.getActiveObject();
@@ -955,16 +786,21 @@ function setStyle(object, styleName, value) {
             
         }
 
+        
+
         $('#font-slider').val(font_Size);
         $('#font-input').val(font_Size);
         if(active.get('type')=='text'){
-            if(font_Size==200){
+             if(font_Size==200){
                 active.set("fontSize",199);
 
-            }else{
-                active.set("fontSize",font_Size);
+             }else{
+                active.set("fontSize",200);
 
-            }
+             }
+            
+
+            
             $('#font-input').val(font_Size);
             canvas.renderAll();
         }
@@ -980,21 +816,6 @@ function setStyle(object, styleName, value) {
 
   });
 
-  $(document).on('click', '.text-color-picker',function(){
-     
-    let textColor=$(this).css("background-color"); 
-    // console.log(rgba2hex(textColor));
-    // var color = Color().fromRgb(textColor)
-    $('#picker0').css("background-color",textColor); 
-    active = canvas.getActiveObject(); 
-    $('#font-color-input').val(rgba2hex(textColor)); 
-    if(active.get('type')=='text'){
-         
-        active.fill=textColor;
-        canvas.renderAll();
-    }
-    
-  });
 
   $(document).on('change', '#font-color-picker',function(){
        
@@ -1058,21 +879,26 @@ function selectedText(e){
     }
     // console.log(e.selected[0].type);
     if(e.selected[0].type=='text'){
-        console.log(e.selected[0]);
+        // console.log(e.selected[0]);
         // console.log(e.selected[0].strokeWidth);
         // console.log(e.selected[0].shadow);
         let selectedText= e.selected[0].text;
         let selectedFontsize= e.selected[0].fontSize;
         let selectedFontFamily= e.selected[0].fontFamily;
-        console.log(selectedFontFamily);
+        // console.log(selectedFontFamily);
         let opt_id=slug2(selectedFontFamily);
         $('#'+opt_id).prop('selected', true);
         let selectedTextColor= e.selected[0].fill;
         let selectedTextstrokewidth= e.selected[0].strokeWidth;
         let selectedTextstrokColor= e.selected[0].stroke;
         let selectedTextshadow= e.selected[0].shadow;
-        $('#font-slider').val(selectedFontsize);
-        $('#font-input').val(selectedFontsize);
+        if(selectedFontsize==199){
+            $("#font-input, #font-slider").val(200);
+
+            }else{
+        $("#font-input, #font-slider").val(selectedFontsize);
+
+            }
         $('#text_field').val(selectedText);
         $('#picker0').css('background-color',selectedTextColor);
         if(selectedTextstrokColor==null){
@@ -1098,7 +924,7 @@ function selectedText(e){
             let selectedshadowblur= e.selected[0].shadow.blur;
             let selectedshadowffsetX= e.selected[0].shadow.offsetX;
             let selectedshadowffsetY= e.selected[0].shadow.offsetY;
-            console.log('teext shod y'+selectedshadowffsetY);
+            // console.log('teext shod y'+selectedshadowffsetY);
             $('#spread-slider').val(selectedshadowblur);
             $('#spread-input').val(selectedshadowblur);
             $('#distance-x-slider').val(selectedshadowffsetX);
@@ -1133,8 +959,99 @@ function rgba2hex(orig) {
     return (hex && hex.length === 8) ? "#" +hex : hex;
 
 }
+active1= canvas.getActiveObject();
+// console.log(active1);
+// var sel = canvas.getObjects() ;
+        let oldwidth=canvas._offset.left;
+        // let oldheight=$('#canvas_frame').height();
+        var sizeWidth = [];
+        var sizeHeight = [];
+        var index=0;
+        if($(window).width() <768 ){
+      //     $('.canvas-container-body').height($('#canvas_frame').height()+40);
+         }
+         if($(window).width() <468 ){
+     
+             
+         }
+              
+if($(window).width() < 550)
+{
+    handle_resize();
+}
+
+$(window).resize(function() {
+    
+ if (canvas.getWidth() != $("#canvas_frame").width() && $(window).width() <= 1024 ) {
+//    console.log('frame width');
+//    console.log($("#canvas_frame").width());
+//     console.log('canvas width');
+//    console.log(canvas.width);
+            var scaleMultiplier = $("#canvas_frame").width() / canvas.width;
+           
+            var objects = canvas.getObjects();
+            for (var i in objects) {
+                // console.log('object scale x');
+                //  console.log(objects[i].scaleX );
+                objects[i].scaleX = objects[i].scaleX * scaleMultiplier;
+                objects[i].scaleY = objects[i].scaleY * scaleMultiplier;
+                objects[i].left = objects[i].left * scaleMultiplier;
+                objects[i].top = objects[i].top * scaleMultiplier;
+                objects[i].setCoords();
+            }
+//   console.log(scaleMultiplier);
+            canvas.setWidth(canvas.getWidth() * scaleMultiplier);
+            canvas.setHeight(canvas.getHeight() * scaleMultiplier);
+            canvas.renderAll();
+            canvas.calcOffset();
+        
+ }
+
+            index++;
+});
+function rescale_canvas_if_needed(){
+    var optimal_dimensions = [500,500];
+    var scaleFactorX=window.innerWidth/optimal_dimensions[0];
+    var scaleFactorY=window.innerHeight/optimal_dimensions[1];
+    if(scaleFactorX <  scaleFactorY && scaleFactorX < 1) {
+        canvas.setWidth(optimal_dimensions[0] *scaleFactorX);
+        canvas.setHeight(optimal_dimensions[1] *scaleFactorX);
+      //  canvas.setZoom(scaleFactorX);
+         canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * scaleFactorX);
+    } else if(scaleFactorX >  scaleFactorY && scaleFactorY < 1){
+        canvas.setWidth(optimal_dimensions[0] *scaleFactorY);
+        canvas.setHeight(optimal_dimensions[1] *scaleFactorY);
+        //canvas.setZoom(scaleFactorY);
+        canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * scaleFactorY);
+    }else {
+        canvas.setWidth(optimal_dimensions[0] );
+        canvas.setHeight(optimal_dimensions[1] );
+        //canvas.setZoom(1);
+           canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * 1);
+    }
+
+    canvas.calcOffset();
+    canvas.renderAll();
+}
 
  
+function handle_resize(){
+    $(".canvas-container").hide();
+    rescale_canvas_if_needed();
+    $(".canvas-container").show();               
+     
+}
+var resizeId = null;
+/*$(function() {
+    $(window).resize(function() {
+        if(resizeId != null)
+        clearTimeout(resizeId);
+        resizeId = setTimeout(handle_resize, 500);
+     });
+    console.log( "ready!" );
+
+    resizeId = setTimeout(handle_resize, 500);
+}); */
 </script>
 @endsection
 @endsection
