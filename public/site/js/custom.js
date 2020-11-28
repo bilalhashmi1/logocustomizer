@@ -1,4 +1,13 @@
 $(document).ready(function() {
+    var fontColorchanged="#000000";
+    var GC=0;
+    var color1;
+    var color2;
+    var BgColor="#ffffff";
+    var bckcolor1;
+    var bckcolor2;
+    // background color or gradient flag variable
+    var bckcolor=0;
     $('.tabs-list div:first').addClass('maker-sidebar__tab-button--active'),
     $('.tab-content .show-content:first').addClass('active');
     
@@ -26,25 +35,60 @@ $(document).ready(function() {
     $(".cancel").click(function(e) {
       $(".popup-overlay").hide();
     });
-    $('.donebtn').on('click', function() {
-        $('.popup-overlay').hide();
+    $('#donebuttontext').on('click', function() {
+         
+        if(GC==0){
+                fontcolortext(fontColorchanged);
+              $('#picker0').css("background",""); 
+              $('#picker0').css("background-color",fontColorchanged); 
+              $('#font-color-input').val(fontColorchanged); 
+             $('.popup-overlay').hide();
+
+            }else if(GC==1){
+
+        active = canvas.getActiveObject();  
+        if(active.get('type')=='text'){
+            var ctx = canvas.getContext('2d');
+            var gradient = ctx.createLinearGradient( 0, 0,  0, text.height);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(0.45, color2);
+            active.fill = gradient;
+            $('#font-color-input').attr('value', ''); 
+            $('#font-color-input').val(''); 
+            $('#font-color-input').attr("placeholder", `${color1}, ${color2})`);
+            $('#picker').css({background: `linear-gradient(${color1}, ${color2})`});
+            canvas.add(active); 
+            canvas.renderAll();
+            $('.popup-overlay').hide();
+
+            }
+            
+
+        }
     });
     
     //   $("#font-color-picker").kendoColorPicker({
          
     // });
     // initialize widgets
-	 kendo.init($("#textfontcolor"));
+        var x =kendo.init($("#textfontcolor"));
+     
+      
+         $('.popup-overlay').hide();
+         $('.popup-overlay').removeClass("popupfake");
+      
      $(" .cancel").click(function(e) {
         $(".popup-overlay").hide();
       });
      var flatColorPicker = $("#flatcolorpicker").data("kendoFlatColorPicker");
+     flatColorPicker.value("rgb(0,0,0)");
+    //  console.log(flatColorPicker);
+
          flatColorPicker.bind("change", function(e) {
                
-               
-              fontcolortext(e.value);
-              $('#picker0').css("background-color",e.value); 
-              $('#font-color-input').val(e.value); 
+               fontColorchanged=e.value;
+               GC=0;
+              
         
          });
     
@@ -58,7 +102,56 @@ $(document).ready(function() {
          
     
     });
+    $(document).on("click", '.text-gradient',function(e) {
+        GC=1;
+        $('.text-gradient').removeClass('active');
+        $(this).addClass('active');
+        color1 =$(this).data('color1');
+        color2 =$(this).data('color2');
+        
+    });
     
+    // canvas background color
+    var backgroundcolorpicker =kendo.init($("#canvas_background_color"));     
+    var backgroundColorPicker = $("#canvas_background_color_picker").data("kendoFlatColorPicker");
+    backgroundColorPicker.value("rgb(0,0,0)");
+    backgroundColorPicker.bind("change", function(e) {
+              
+                BgColor=e.value;
+                bckcolor=0;
+ 
+        });
+    $(document).on('click','#backgroundbtn',function(e) {
+            e.preventDefault();
+        if(bckcolor==0){
+            canvas.backgroundColor=BgColor;
+            canvas.renderAll();
+            $('#picker5').css("background-color",BgColor); 
+             
+        }else if(bckcolor==1){
+
+            let ctx = canvas.getContext('2d');
+            let  bckgradient = ctx.createLinearGradient( 0, 0,  0, canvas.height);
+            bckgradient.addColorStop(0, bckcolor1);
+            bckgradient.addColorStop(0.45, bckcolor2); 
+            $('#picker5').css({background: `linear-gradient(${bckcolor1}, ${bckcolor2})`});
+            canvas.backgroundColor=bckgradient;
+            canvas.renderAll();
+
+
+        }
+        $('.popup-overlay').hide();
+
+        });
+    $(document).on("click", '.canvas-gradient',function(e) {
+        bckcolor=1;
+        $('.canvas-gradient').removeClass('active');
+        $(this).addClass('active');
+        bckcolor1 =$(this).data('color1');
+        bckcolor2 =$(this).data('color2');
+        
+    });
+
     // $('.stroke-color-container .sp-input').after(`<div class="recommended-color" >
     // <p class="mb-1">Recommended Color</p>
     // <span id="" class="color-picker outline-color-picker" data-color="rgb(250, 125, 127);" style="background-color: rgb(250, 125, 127);"></span>
@@ -119,84 +212,13 @@ $(document).ready(function() {
         
     });
      var shadowColor="rgb(4, 0, 0";
-    $(document).on("click", '.text-gradient',function(e) {
-        
-        let color1 =$(this).data('color1');
-        let color2 =$(this).data('color2');
-        active = canvas.getActiveObject();  
-        if(active.get('type')=='text'){
-            var ctx = canvas.getContext('2d');
-            var gradient = ctx.createLinearGradient( 0, 0,  0, text.height);
-            gradient.addColorStop(0, color1);
-            gradient.addColorStop(0.45, color2);
-            active.fill = gradient;
-            $('#font-color-input').val(color1+','+color2);
-            $('#picker0').css({background: `linear-gradient(${color1}, ${color2})`});
-            canvas.add(active); 
-            canvas.renderAll();
     
-        }
-    });
-    $('.shadow-color-container').on('click','.outline-color-picker', function(){
-                
-                
-                
-        if($('#text-shadow').is(":checked")){
-            shadowColor=$(this).css("background-color");
-        let shadowSpread=$('#spread-slider').val();
-        let shadowDistanceX=$('#distance-x-slider').val();
-        let shadowDistanceY=$('#distance-y-slider').val();
-        $('#picker2').css("background-color",shadowColor);  
-        $('#spread-input').val(shadowSpread);
-        $('#distance-y-input').val(shadowDistanceX);
-        $('#distance-y-input').val(shadowDistanceY);
-            let c = Color(shadowColor)
-            // console.log("Checkbox is checked.");
-            // console.log(c.toString());
-            active = canvas.getActiveObject(); 
-            // console.log(active);
-            
-            if(active.get('type')=='text'){
-                var shadow = new fabric.Shadow({ 
-                    color: c.toString(), 
-                    blur : shadowSpread,
-                    offsetX: shadowDistanceX,
-                    offsetY: shadowDistanceY, 
-                        });
-                
-                active.shadow=shadow;  
-                canvas.renderAll();
-            }
-            
-            
-        } else if($(this).is(":not(:checked)")){
-            console.log("Checkbox is unchecked.");
-            active.shadow=null;
-            canvas.renderAll();
-            
-        }
     
-    });
     $(document).on('change','.textshadow', function(e){
         let shadowSpread=$('#spread-slider').val();
         let shadowDistanceX=$('#distance-x-slider').val();
         let shadowDistanceY=$('#distance-y-slider').val();    
-        let changeID=$(this).attr('id');
-        if(changeID=='spread-input'){
-        let shadowSpread=$(this).val();
-        // console.log(1);
-        }else if(changeID=='distance-x-input'){
-        let shadowDistanceX=$(this).val();
-        // console.log(2);
-        
-        }else if(changeID=='distance-y-input'){
-        let shadowDistanceY=$(this).val();
-        // console.log(3);
-        
-        } else if(changeID=='shadow-color'){
-        shadowColor=$(this).val();
-         
-        }
+        let shadowColor=$('#shadow-color').val();    
         if($('#text-shadow').is(":checked")){ 
              
             active = canvas.getActiveObject(); 
@@ -308,22 +330,43 @@ $(document).ready(function() {
     
     
     });
+     var lastleft;
     $("#text_btn").on("click", function(e) {
         let fontfamily=$('#font_select').val();
-    
+        let lasttextadded=getlasttext();
+        let texttop=lasttextadded.top+lasttextadded.fontSize;
+        
+        
+        console.log('sss'+texttop);
         text1 = new fabric.Text(
             'Logo tagline here', { 
             fontFamily: fontfamily,
-            left: defaultLeft+10, 
-            top: defaultTop+50,  
+            fontSize: 40,
+            // left: lasttextadded.left, 
+            // top: texttop,  
             textAlign: 'center',
             lockUniScaling: true,  
             objectCaching:false  });
         // canvas.centerObject(text1);
+        if(texttop+40>canvas.height){
+            texttop=10;
+        }
+        console.log(text1.width);
+        if(lasttextadded.customType == 'Heading'){
+            // lastleft=(lasttextadded.left+((lasttextadded.width/2)-text1.width));
+            lastleft = lasttextadded.width+lasttextadded.left/2 - text1.width;
+        }else{
+            lastleft=lasttextadded.left;
+        }
+        text1.top=texttop;
+        text1.left=lastleft;
         canvas.add(text1);
         text1.setControlsVisibility(HideControls);
-    
         canvas.setActiveObject(text1);
+        
+       console.log(canvas);
+         
+         
     });
 
     function fontcolortext(color){
@@ -335,5 +378,19 @@ $(document).ready(function() {
             canvas.renderAll();
         }
     }
-    
+   
+   function getlasttext(){
+       let lasttext;
+     
+
+       for (let index = 0; index < canvas._objects.length; index++) {
+               if(canvas._objects[index].get('type')=='text'){
+                 lasttext=canvas._objects[index];
+
+               }
+       }
+
+       return lasttext;
+
+    }
     })

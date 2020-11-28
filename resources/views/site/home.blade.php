@@ -48,6 +48,9 @@ input[type=number] {
 .k-button.k-primary.apply:hover{background:#efefef;color:#000}
 .k-button.cancel{color:#000;padding:0.2rem 2.5rem;margin:0 5px;border:1px solid #8d8d8d;background:#fff}
 .k-button.cancel:hover{background:#efefef;color:#000}
+span.active {
+    border: 4px solid #010101;
+}
 
 /* .color-picker-wrapper{
     display: inline;
@@ -104,13 +107,13 @@ a.sp-cancel {
     vertical-align: middle;
 } */
 .canvas_frame{
-    width:50%;
+    width:75%;
     height:100%;
 }
 @media only screen and (max-width: 1024px) {
   .canvas_frame {
-    width:500px;
-    height:500px;
+    /* width:500px;
+    height:500px; */
   }
 }
 @media only screen and (max-width: 565px) {
@@ -127,10 +130,10 @@ a.sp-cancel {
     height:300px;
   }
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1330px) {
 	 .canvas_frame {
-    width: 500px;
-    height:100%;
+   /* // width: 50%; */
+/* height:100%; */
 }
   }
   
@@ -168,7 +171,7 @@ a.sp-cancel {
                                         <span id="picker0" class="color-picker picker" style="background-color: #000000;"></span>
                                     </p>
 									
-									<div class="popup-overlay">
+									<div class="popup-overlay popupfake">
 										<div class="popup-content">
                                             <div id="textfontcolor">
 												 
@@ -192,9 +195,9 @@ a.sp-cancel {
                                                     <span class="color-picker text-gradient" data-color1="rgb(66, 230, 149)" data-color2="rgb(59, 178, 184)" style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
                                                     <span class="color-picker text-gradient" data-color1="rgb(91, 36, 122)" data-color2="rgb(27, 206, 223)" style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
                                                     <span class="color-picker text-gradient" data-color1="rgb(101, 121, 155)" data-color2="rgb(94, 37, 99)" style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
-</div>
+                                                </div>
 												<p class="text-center mt-3">
-                                                    <button class="btn btn-primary donebtn">DONE</button>
+                                                    <button id="donebuttontext"class="btn btn-primary donebtn">DONE</button>
                                                     <button class="btn btn-primary donebtn cancel">CANCEL</button>
 												</p>
                                                 </div>
@@ -204,7 +207,7 @@ a.sp-cancel {
 										</div>
 									</div>
 								</div>
-                        </div>
+                            </div>
                             
                             <p class="color-inputpicker">
                                 <h3>FONT SIZE (PX)</h3>
@@ -343,61 +346,54 @@ a.sp-cancel {
                         <article class="tab-pane container" id="tab-panel-3">
                             <h2>Edit Background</h2>
                             <hr/>
-                            <p class="mb-1">New Color</p>
-                            <span id="" class="color-picker" style="background-color: rgb(255, 255, 255);">+</span>
-                            
-                            <p class="mt-4 mb-1">Recommended Color</p>
-                            <span id="" class="color-picker" style="background-color: rgb(250, 125, 127);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(129, 5, 10);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(148, 6, 13);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(147, 7, 13);"></span>
-                            
-                            <p class="mt-4 mb-1">Logo Color</p>
-                            <span id="" class="color-picker" style="background-color: rgb(252, 103, 106);"></span>
-                            
-                            <p class="mt-4 mb-1">Default Color</p>
-                            <span id="" class="color-picker" style="background-color: rgb(0, 0, 0);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(84, 84, 85);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(115, 115, 115);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(165, 165, 165);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(217, 217, 216);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(255, 255, 255);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(253, 89, 92);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(252, 106, 195);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(202, 113 228);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(139, 91, 251);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(85, 118, 251);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(64, 184, 252);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(253, 145, 85);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(254, 189, 97);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(254, 221, 100);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(202, 227, 109);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(130, 214, 96);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(99, 224, 229);"></span>
-                            
-                            <p class="mt-4 mb-1">Gradient Color</p>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(252, 227, 138), rgb(243, 129, 129));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(248, 77, 158), rgb(255, 116, 117));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(23, 234, 217), rgb(96, 120, 234));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(98, 39, 116), rgb(197, 51, 100));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(113, 23, 234), rgb(234, 96, 96));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(180, 236, 81), rgb(66, 147, 33));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(245, 81, 95), rgb(159, 4, 27));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(48, 35, 174), rgb(200, 109, 215));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
+                            <p class="mb-1">Background Color</p>
+                            <div class="font-style-picker">
+                                <div class="color-pickerPopup">
+                                    
+                                      <span id="picker5" class="color-picker picker" style="background-color: #ffffff;"></span>
+                                    
+                                   <div class="popup-overlay ">
+                                      <div class="popup-content">
+                                         <div id="canvas_background_color">
+                                            <div class="demo-section k-content">
+                                               <div class="box-col">
+                                                  <div id="canvas_background_color_picker" data-role="flatcolorpicker"></div>
+                                               </div>
+                                               <div class="gradient-color">
+                                                  <p class="mt-4 mb-1">Gradient Color</p>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(252, 227, 138)" data-color2="rgb(243, 129, 129)" style="background: linear-gradient(rgb(252, 227, 138), rgb(243, 129, 129));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(248, 77, 158)" data-color2="rgb(255, 116, 117)" style="background: linear-gradient(rgb(248, 77, 158), rgb(255, 116, 117));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(23, 234, 217)" data-color2="rgb(96, 120, 234)" style="background: linear-gradient(rgb(23, 234, 217), rgb(96, 120, 234));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(98, 39, 116)" data-color2="rgb(197, 51, 100)" style="background: linear-gradient(rgb(98, 39, 116), rgb(197, 51, 100));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(113, 23, 234)" data-color2="rgb(234, 96, 96)" style="background: linear-gradient(rgb(113, 23, 234), rgb(234, 96, 96));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(180, 236, 81)" data-color2="rgb(66, 147, 33)" style="background: linear-gradient(rgb(180, 236, 81), rgb(66, 147, 33));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(250, 217, 97)" data-color2="rgb(247, 107, 28)" style="background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(245, 81, 95)" data-color2="rgb(159, 4, 27)" style="background: linear-gradient(rgb(245, 81, 95), rgb(159, 4, 27));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(48, 35, 174)" data-color2="rgb(200, 109, 215)" style="background: linear-gradient(rgb(48, 35, 174), rgb(200, 109, 215));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(66, 230, 149)" data-color2="rgb(59, 178, 184)" style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(91, 36, 122)" data-color2="rgb(27, 206, 223)" style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
+                                                  <span class="color-picker canvas-gradient" data-color1="rgb(101, 121, 155)" data-color2="rgb(94, 37, 99)" style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
+                                               </div>
+                                               <p class="text-center mt-3">
+                                                  <button id="backgroundbtn"class="btn btn-primary donebtn">DONE</button>
+                                                  <button class="btn btn-primary donebtn cancel">CANCEL</button>
+                                               </p>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
                         </article>
                         <article class="tab-pane container" id="tab-panel-4">
                             <h2>Edit Layout</h2>
                             <hr/>
                             <div class="maker-toolbar">
-                                <button class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-left.png')}}" alt="" /><br/>Left</button> 
-                                <button class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-right.png')}}" alt="" /><br/>right</button> 
-                                <button class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-top.png')}}" alt="" /><br/>top</button> 
-                                <button class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-bottom.png')}}" alt="" /><br/>Bottom</button>
-                                <button class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-reset.png')}}" alt="" /><br/>Reset</button>
+                                <button onclick="layout('left')" class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-left.png')}}" alt="" /><br/>Left</button> 
+                                <button onclick="layout('right')" class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-right.png')}}" alt="" /><br/>right</button> 
+                                <button onclick="layout('top')" class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-top.png')}}" alt="" /><br/>top</button> 
+                                <button onclick="layout('bottom')" class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-bottom.png')}}" alt="" /><br/>Bottom</button>
+                                <button onclick="layout('reset')" class="maker-tool--box"><img class="img-responsive" src="{{asset('/site/img/ic-reset.png')}}" alt="" /><br/>Reset</button>
                             </div>
                         </article>
                         <article class="tab-pane container" id="tab-panel-5">
@@ -454,40 +450,40 @@ a.sp-cancel {
                 </div>
             </div> 
             <div class="maker-sidebar__tab-nav">
-            <div class="maker-sidebar__tab-button-container tabs-list">
-                <div class="maker-sidebar__tab-button">
-                    <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/text-icon.svg')}}" alt="" /><br/>Text</div>
+                <div class="maker-sidebar__tab-button-container tabs-list">
+                    <div class="maker-sidebar__tab-button">
+                        <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/text-icon.svg')}}" alt="" /><br/>Text</div>
+                    </div>
+                    <div class="maker-sidebar__tab-button">
+                        <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-logo.svg')}}" alt="" /><br/>Logo</div>
+                    </div>
+                    <div class="maker-sidebar__tab-button">
+                        <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-bg.svg')}}" alt="" /><br/>Background</div>
+                    </div>
+                    <div class="maker-sidebar__tab-button">
+                        <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-layout.svg')}}" alt="" /><br/>Layout</div>
+                    </div>
+                    <div class="maker-sidebar__tab-button">
+                        <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-shapes.svg')}}" alt="" /><br/>Shapes</div>
+                    </div>
                 </div>
-                <div class="maker-sidebar__tab-button">
-                    <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-logo.svg')}}" alt="" /><br/>Logo</div>
-                </div>
-                <div class="maker-sidebar__tab-button">
-                    <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-bg.svg')}}" alt="" /><br/>Background</div>
-                </div>
-                <div class="maker-sidebar__tab-button">
-                    <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-layout.svg')}}" alt="" /><br/>Layout</div>
-                </div>
-                <div class="maker-sidebar__tab-button">
-                    <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-shapes.svg')}}" alt="" /><br/>Shapes</div>
-                </div>
-            </div>
-               {{-- <ul class="nav nav-tabs left-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active text-center" href="#tab-panel-1" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-text.png')}}" alt="" /><br/>Text</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-center" href="#tab-panel-2" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-logo.png')}}" alt="" /><br/>Logo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-center" href="#tab-panel-3" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-bg.png')}}" alt="" /><br/>Background</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-center" href="#tab-panel-4" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-layout.png')}}" alt="" /><br/>Layout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-center" href="#tab-panel-5" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-shapes.png')}}" alt="" /><br/>Shapes</a>
-                    </li>
-                </ul>	 --}}
+                {{-- <ul class="nav nav-tabs left-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active text-center" href="#tab-panel-1" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-text.png')}}" alt="" /><br/>Text</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#tab-panel-2" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-logo.png')}}" alt="" /><br/>Logo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#tab-panel-3" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-bg.png')}}" alt="" /><br/>Background</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#tab-panel-4" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-layout.png')}}" alt="" /><br/>Layout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#tab-panel-5" data-toggle="tab"><img class="img-responsive" src="{{asset('/site/{{asset('/site/img/icon-shapes.png')}}" alt="" /><br/>Shapes</a>
+                        </li>
+                    </ul>	 --}}
             </div>
         </div>
     </div>
@@ -534,6 +530,7 @@ a.sp-cancel {
 <script>
     
 var active;
+var svgadded;
 var HideControls = {
     'tl':true,
     'tr':true,
@@ -548,7 +545,7 @@ var HideControls = {
   var gfonts = JSON.parse(gfl);
     // create a wrapper around native canvas element (with id="c")
 var canvas = new fabric.Canvas('c',{backgroundColor : "white"});
-
+var allText=[];
 canvas.setWidth($("#canvas_frame").width());
 canvas.setHeight($("#canvas_frame").height());
 
@@ -564,6 +561,7 @@ text = new fabric.Text(
             objectCaching:false  });
 
     //     canvas.add(text);
+        text.customType='Heading';
     //   canvas.centerObject(text);
     text.setControlsVisibility(HideControls);
 
@@ -593,18 +591,22 @@ text = new fabric.Text(
 
     canvas.add(obj); 
     canvas.renderAll();
+    svgadded=obj;
  
   
  
 });
 canvas.on('object:scaling', function(event) {
     if(event.target){
+        // console.log(event.target.height);
         if(event.target.type=='text'){ 
             // $("#font-input, #font-slider ").val((event.target.fontSize * event.target.scaleX).toFixed(0));
-        }
+        } 
     }
 });
 canvas.on('object:modified', function(event) {
+     
+     
     if (event.target) {
         if(event.target.type=='text'){
             // console.log('beforescalex='+event.target.fontSize);
@@ -621,23 +623,30 @@ canvas.on('object:modified', function(event) {
         event.target._clearCache();
         // console.log('tofixed='+event.target.fontSize.toFixed(0));
         // console.log('scaleX='+event.target.scaleX);
-        console.log('sssssssssss');
+         
 
         if(finalfontsize==199){
             $("#font-input, #font-slider").val(200);
 
-            }else{
-        $("#font-input, #font-slider").val(finalfontsize);
+        }else{
+                $("#font-input, #font-slider").val(finalfontsize);
 
-            }
+        }
         }
     }
 });
 canvas.on("selection:updated", function (e) {
+    // console.log(e.selected[0].width);
+    if(e.selected[0].type=='text'){
     selectedText(e);
+    }
 });
 canvas.on("selection:created", function (e) {
+    console.log("created");
+
+    if(e.selected[0].type=='text'){
     selectedText(e);
+    }
 });
 
 $(document).on('change keyup','#text_field', function(){
@@ -795,7 +804,7 @@ function setStyle(object, styleName, value) {
                 active.set("fontSize",199);
 
              }else{
-                active.set("fontSize",200);
+                active.set("fontSize",font_Size);
 
              }
             
@@ -819,7 +828,7 @@ function setStyle(object, styleName, value) {
 
   $(document).on('change', '#font-color-picker',function(){
        
-      let fontColorPicker=$('#font-color-picker').spectrum("get"); 
+      let fontColorPicker=$('#font-color-picker').val(); 
         active = canvas.getActiveObject();
     $('#picker0').css("background-color",fontColorPicker.toHexString());  
     $('#font-color-input').val(fontColorPicker.toHexString());
@@ -835,8 +844,11 @@ function setStyle(object, styleName, value) {
       let fontColorInput=$(this).val();
      
       if (fontColorInput.match(/^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/)) {
+        let flatColorPicker1 = $("#flatcolorpicker").data("kendoFlatColorPicker");
+     
+        flatColorPicker1.value("rgb(0,0,0)");
         
-        $('#font-color-picker').val(fontColorInput);
+        // $('#font-color-picker').val(fontColorInput);
         $('#picker0').css("background-color",fontColorInput);
         active = canvas.getActiveObject(); 
         if(active.get('type')=='text'){
@@ -878,7 +890,7 @@ function selectedText(e){
     return $slug2.toLowerCase();
     }
     // console.log(e.selected[0].type);
-    if(e.selected[0].type=='text'){
+    
         // console.log(e.selected[0]);
         // console.log(e.selected[0].strokeWidth);
         // console.log(e.selected[0].shadow);
@@ -896,20 +908,25 @@ function selectedText(e){
             $("#font-input, #font-slider").val(200);
 
             }else{
-        $("#font-input, #font-slider").val(selectedFontsize);
+            $("#font-input, #font-slider").val(selectedFontsize);
 
             }
         $('#text_field').val(selectedText);
         $('#picker0').css('background-color',selectedTextColor);
+        $('#font-color-input').val(selectedTextColor);
+
         if(selectedTextstrokColor==null){
             $('#text-outline').prop("checked", false);
             $('#outline_fields').hide();
+            $('#picker1').css("background-color",'rgb(1,0,0)');
+            $('#outline-color').kendoColorPicker("value", 'rgb(1,0,0)');
+            $('#outline-slider').val(2);
 
         }else{
             $('#text-outline').prop("checked", true);
             $('#outline_fields').show();
             $('#picker1').css("background-color",selectedTextstrokColor);
-            $('#outline-color').spectrum("set", selectedTextstrokColor);
+            $('#outline-color').kendoColorPicker("value", selectedTextstrokColor);
             $('#outline-slider').val(selectedTextstrokewidth);
 
         }
@@ -917,6 +934,13 @@ function selectedText(e){
             // console.log("uncheck");
             $('#text-shadow').prop("checked", false);
             $('#shadow_fields').hide(); 
+            $('#spread-slider').val(3);
+            $('#spread-input').val(3);
+            $('#distance-x-slider').val(1);
+            $('#distance-x-input').val(1);
+            $('#distance-y-slider').val(1);
+            $('#distance-y-input').val(1);
+            $('#shadow-color').kendoColorPicker("value",  'rgb(4,0,0)');
         }else{
             $('#text-shadow').prop("checked", true);
             $('#shadow_fields').show(); console.log(e.selected[0].shadow.color); 
@@ -931,13 +955,13 @@ function selectedText(e){
             $('#distance-x-input').val(selectedshadowffsetX);
             $('#distance-y-slider').val(selectedshadowffsetY);
             $('#distance-y-input').val(selectedshadowffsetY);
-            $('#shadow-color').val(selectedshadowcolor);
+            $('#shadow-color').kendoColorPicker("value", selectedshadowcolor);
             $('#picker2').css("background-color",selectedshadowcolor);
 
 
         }
         
-    }
+    
 }
 function rgba2hex(orig) {
     var a, isPercent,
@@ -982,7 +1006,7 @@ if($(window).width() < 550)
 
 $(window).resize(function() {
     
- if (canvas.getWidth() != $("#canvas_frame").width() && $(window).width() <= 1024 ) {
+ if (canvas.getWidth() != $("#canvas_frame").width() && $(window).width() <= 1380 ) {
 //    console.log('frame width');
 //    console.log($("#canvas_frame").width());
 //     console.log('canvas width');
@@ -1052,6 +1076,303 @@ var resizeId = null;
 
     resizeId = setTimeout(handle_resize, 500);
 }); */
+var layoutType;
+var resetCanvas="";
+var txtTop=canvas.height/8;
+
+function layout(type){
+    
+    
+    
+ layoutType=type;
+if(layoutType=="left"){
+    svgadded.scaleToHeight(txtTop);
+    svgadded.left=30;
+    svgadded.top=canvas.height/2;
+    // svgadded.originX='left';
+    // svgadded.originY='center';
+    text.fontSize=txtTop;
+    
+    
+    
+    svgadded.setCoords();
+    text.setCoords();
+
+    canvas.renderAll(); 
+    active = canvas.getActiveObject();  
+    let totaltxt=canvas._objects.length-1;
+    
+    var headTop=svgadded.top;
+    
+    let sizeTxt=(txtTop/totaltxt)+10;
+        
+
+    $.each( canvas._objects, function( key, value ) {
+       if(canvas._objects[key].get('type')=='text'){
+        if (canvas._objects[key].customType == 'Heading'){
+
+            canvas._objects[key].fontSize=sizeTxt.toFixed(0);
+            canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX)+30;
+            // canvas._objects[key].left=svgadded.left+30;
+            
+
+            canvas._objects[key].top=canvas.height/2 ;
+            canvas._objects[key].originX='left';
+            // canvas._objects[key].originY='center';
+            headTop = canvas._objects[key].top;
+            canvas._objects[key].setCoords();
+            canvas.renderAll(); 
+            console.log("head left"+canvas._objects[key].left);
+                
+        }else{
+            canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);
+            canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX)+30;
+            // canvas._objects[key].left=svgadded.left+30;
+            canvas._objects[key].originX='left';
+
+            if(canvas._objects[key-1].get('type')!=='text'){
+            canvas._objects[key].top=headTop+canvas._objects[key-2].height;
+
+            }else{
+            canvas._objects[key].top=headTop+canvas._objects[key-1].height;
+
+            }
+            // canvas._objects[key].originX='left';
+            // canvas._objects[key].originY='center';
+            headTop = canvas._objects[key].top;
+            canvas._objects[key].setCoords();
+            canvas.renderAll(); 
+             
+
+
+            }
+            
+
+       }
+       console.log(canvas);
+
+
+    });
+    
+
+     
+
+     
+}else if(layoutType=="right"){
+    svgadded.scaleToHeight(txtTop);
+    svgadded.left=canvas.width-(svgadded.width*svgadded.scaleX+30);
+    svgadded.top=(canvas.height/2)-(txtTop/2);
+    text.fontSize=txtTop;
+    
+    console.log(svgadded.left+svgadded.width);
+    
+    svgadded.setCoords();
+    text.setCoords();
+
+    canvas.renderAll(); 
+    active = canvas.getActiveObject();  
+    let totaltxt=canvas._objects.length-1;
+    
+    var headTop=svgadded.top;
+    
+    let sizeTxt=(txtTop/totaltxt)+10;
+        
+
+    $.each( canvas._objects, function( key, value ) {
+       if(canvas._objects[key].get('type')=='text'){
+        if (canvas._objects[key].customType == 'Heading'){
+
+            canvas._objects[key].fontSize=sizeTxt.toFixed(0);
+            canvas._objects[key].left=svgadded.left-30;
+            canvas._objects[key].top=headTop ;
+            canvas._objects[key].originX='right';
+            // canvas._objects[key].originY='center';
+            headTop = canvas._objects[key].top;
+            canvas._objects[key].setCoords();
+            canvas.renderAll(); 
+            console.log("head left"+canvas._objects[key].left);
+                
+        }else{
+            canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);;
+            canvas._objects[key].left=svgadded.left-30;
+            canvas._objects[key].originX='right';
+
+            if(canvas._objects[key-1].get('type')!=='text'){
+            canvas._objects[key].top=headTop+canvas._objects[key-2].height;
+
+            }else{
+            canvas._objects[key].top=headTop+canvas._objects[key-1].height;
+
+            }
+            headTop = canvas._objects[key].top;
+            canvas._objects[key].setCoords();
+            canvas.renderAll(); 
+             
+
+
+            }
+            
+
+       }
+       console.log(canvas);
+
+
+    });
+    
+
+     
+
+     
+}else if(layoutType=="top"){
+    svgadded.scaleToHeight(txtTop);
+    svgadded.left=canvas.width/2 ;
+    svgadded.top=canvas.height/2;
+    svgadded.originX='center';
+    svgadded.originY='bottom';
+    text.fontSize=txtTop;
+    
+    console.log(svgadded.left+svgadded.width);
+    
+    svgadded.setCoords();
+    text.setCoords();
+
+    canvas.renderAll(); 
+    active = canvas.getActiveObject();  
+    let totaltxt=canvas._objects.length-1;
+    
+    var headTop=svgadded.top;
+    var headLeft=svgadded.left;
+    
+    let sizeTxt=(txtTop/totaltxt)+10;
+        
+
+    $.each( canvas._objects, function( key, value ) {
+       if(canvas._objects[key].get('type')=='text'){
+        if (canvas._objects[key].customType == 'Heading'){
+
+            canvas._objects[key].fontSize=sizeTxt.toFixed(0);
+            canvas._objects[key].left=svgadded.left;
+            canvas._objects[key].top=svgadded.top ;
+            canvas._objects[key].originX='center'; 
+            canvas._objects[key].originY='top';
+            headTop = canvas._objects[key].top;
+            headLeft = canvas._objects[key].left;
+            canvas._objects[key].setCoords();
+            canvas.renderAll(); 
+            console.log("head left"+canvas._objects[key].left);
+                
+        } else{
+            canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);;
+            // canvas._objects[key].top=headTop;
+            
+
+            if(canvas._objects[key-1].get('type')!=='text'){
+            canvas._objects[key].top=headTop+canvas._objects[key-2].height;
+
+            }else{
+            canvas._objects[key].top=headTop+canvas._objects[key-1].height;
+
+            }
+            canvas._objects[key].left=headLeft;
+            canvas._objects[key].originX='center';
+            canvas._objects[key].originY='top';
+            headTop = canvas._objects[key].top;
+            canvas._objects[key].setCoords();
+            canvas.renderAll(); 
+             
+
+
+            }
+            
+
+       }
+       console.log(canvas);
+
+
+    });
+
+
+}else if(layoutType=="bottom"){
+    
+    svgadded.scaleToHeight(txtTop);
+    svgadded.left=canvas.width/2 ;
+    svgadded.top=canvas.height/2;
+    svgadded.originX='center';
+    svgadded.originY='top';
+    text.fontSize=txtTop;
+    
+    console.log(svgadded.left+svgadded.width);
+    
+    svgadded.setCoords();
+    text.setCoords();
+
+    canvas.renderAll(); 
+    active = canvas.getActiveObject();  
+    let totaltxt=canvas._objects.length-1;
+    
+    var headTop=svgadded.top;
+    var headLeft=svgadded.left;
+    
+    let sizeTxt=(txtTop/totaltxt)+10;
+        
+
+    $.each( canvas._objects, function( key, value ) {
+       if(canvas._objects[key].get('type')=='text'){
+        if (canvas._objects[key].customType == 'Heading'){
+
+            canvas._objects[key].fontSize=sizeTxt.toFixed(0);
+            canvas._objects[key].left=svgadded.left;
+            canvas._objects[key].top=svgadded.top ;
+            canvas._objects[key].originX='center';
+            canvas._objects[key].originY='bottom';
+            // canvas._objects[key].originY='center';
+            headTop = canvas._objects[key].top;
+            headLeft = canvas._objects[key].left;
+            canvas._objects[key].setCoords();
+            canvas.renderAll(); 
+            console.log("head left"+canvas._objects[key].left);
+                
+        }else{
+            canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);;
+            // canvas._objects[key].top=headTop;
+            
+
+            if(canvas._objects[key-1].get('type')!=='text'){
+            canvas._objects[key].top=headTop-canvas._objects[key-2].height;
+
+            }else{
+            canvas._objects[key].top=headTop-canvas._objects[key-1].height;
+
+            }
+            canvas._objects[key].left=headLeft;
+            canvas._objects[key].originX='center';
+            canvas._objects[key].originY='bottom';
+
+            headTop = canvas._objects[key].top;
+            canvas._objects[key].setCoords();
+            canvas.renderAll(); 
+             
+
+
+            }
+            
+
+       }
+       console.log(canvas);
+
+
+    });
+
+
+}else if(layoutType=="reset"){
+    console.log("reset");
+
+
+}
+
+
+
+}
 </script>
 @endsection
 @endsection
