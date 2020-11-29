@@ -1087,10 +1087,10 @@ function layout(type){
  layoutType=type;
 if(layoutType=="left"){
     svgadded.scaleToHeight(txtTop);
-    svgadded.left=30;
+    svgadded.left=100;
     svgadded.top=canvas.height/2;
-    // svgadded.originX='left';
-    // svgadded.originY='center';
+    svgadded.originX='right';
+    svgadded.originY='center';
     text.fontSize=txtTop;
     
     
@@ -1112,13 +1112,13 @@ if(layoutType=="left"){
         if (canvas._objects[key].customType == 'Heading'){
 
             canvas._objects[key].fontSize=sizeTxt.toFixed(0);
-            canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX)+30;
-            // canvas._objects[key].left=svgadded.left+30;
+            // canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX);
+            canvas._objects[key].left=svgadded.left;
             
 
-            canvas._objects[key].top=canvas.height/2 ;
+            canvas._objects[key].top=headTop ;
             canvas._objects[key].originX='left';
-            // canvas._objects[key].originY='center';
+            canvas._objects[key].originY='center';
             headTop = canvas._objects[key].top;
             canvas._objects[key].setCoords();
             canvas.renderAll(); 
@@ -1126,9 +1126,9 @@ if(layoutType=="left"){
                 
         }else{
             canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);
-            canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX)+30;
-            // canvas._objects[key].left=svgadded.left+30;
-            canvas._objects[key].originX='left';
+            // canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX);
+            canvas._objects[key].left=svgadded.left;
+            // canvas._objects[key].originX='left';
 
             if(canvas._objects[key-1].get('type')!=='text'){
             canvas._objects[key].top=headTop+canvas._objects[key-2].height;
@@ -1137,8 +1137,8 @@ if(layoutType=="left"){
             canvas._objects[key].top=headTop+canvas._objects[key-1].height;
 
             }
-            // canvas._objects[key].originX='left';
-            // canvas._objects[key].originY='center';
+            canvas._objects[key].originX='left';
+            canvas._objects[key].originY='center';
             headTop = canvas._objects[key].top;
             canvas._objects[key].setCoords();
             canvas.renderAll(); 
@@ -1149,19 +1149,33 @@ if(layoutType=="left"){
             
 
        }
-       console.log(canvas);
+    //    console.log(canvas);
 
 
     });
     
+    // $.each( canvas._objects, function( key, value ) {
+    //    if(canvas._objects[key].get('type')=='text'){
+    //         allText.push(canvas._objects[key]);
+    //    }
+    //  });
+    //  var group = new fabric.Group(allText,{
+    //      left:svgadded.left,
+    //      originX:'left',
+    //      originY:'center',
 
-     
+    //  });
+    //  canvas.add(group);
+    //  canvas.renderAll(); 
+
 
      
 }else if(layoutType=="right"){
     svgadded.scaleToHeight(txtTop);
     svgadded.left=canvas.width-(svgadded.width*svgadded.scaleX+30);
     svgadded.top=(canvas.height/2)-(txtTop/2);
+    svgadded.originX='left';
+    svgadded.originY='center';
     text.fontSize=txtTop;
     
     console.log(svgadded.left+svgadded.width);
@@ -1183,9 +1197,10 @@ if(layoutType=="left"){
         if (canvas._objects[key].customType == 'Heading'){
 
             canvas._objects[key].fontSize=sizeTxt.toFixed(0);
-            canvas._objects[key].left=svgadded.left-30;
+            canvas._objects[key].left=svgadded.left;
             canvas._objects[key].top=headTop ;
             canvas._objects[key].originX='right';
+            canvas._objects[key].originY='center';
             // canvas._objects[key].originY='center';
             headTop = canvas._objects[key].top;
             canvas._objects[key].setCoords();
@@ -1194,8 +1209,7 @@ if(layoutType=="left"){
                 
         }else{
             canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);;
-            canvas._objects[key].left=svgadded.left-30;
-            canvas._objects[key].originX='right';
+            canvas._objects[key].left=svgadded.left;
 
             if(canvas._objects[key-1].get('type')!=='text'){
             canvas._objects[key].top=headTop+canvas._objects[key-2].height;
@@ -1204,6 +1218,8 @@ if(layoutType=="left"){
             canvas._objects[key].top=headTop+canvas._objects[key-1].height;
 
             }
+            canvas._objects[key].originX='right';
+            canvas._objects[key].originY='center';
             headTop = canvas._objects[key].top;
             canvas._objects[key].setCoords();
             canvas.renderAll(); 
@@ -1214,10 +1230,15 @@ if(layoutType=="left"){
             
 
        }
-       console.log(canvas);
+
 
 
     });
+    console.log("canvas:::"+canvas.width);
+console.log("Left:::"+svgadded.left);
+console.log("top:::"+svgadded.top);
+console.log("textLeft:::"+canvas._objects[0].left);
+console.log("textTop:::"+canvas._objects[0].top);
     
 
      
