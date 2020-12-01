@@ -25,31 +25,34 @@ input[type=number] {
     width: 100%;
     object-fit: contain;
 }
-        .k-slider-track{
-			width:100% !important;
+.k-slider-track{
+    width:100% !important;
 
-		}
-		.k-flatcolorpicker .k-color-value {
-			margin: 0 35px 0 0;
-		}
-		.k-selected-color-display {
-    		border-radius: 5px;
-        }
-        .k-flatcolorpicker :nth-child(1) { order: 3; }
-        .k-flatcolorpicker :nth-child(2) { order: 1; }
-        .k-flatcolorpicker :nth-child(3) { order: 2; }
-        .k-flatcolorpicker :nth-child(4) { order: 4; }
-        
-        .k-flatcolorpicker .k-controls {
-    
-            padding-bottom: 5px;
-        }
-        .k-button.k-primary.apply{color:#000;padding:0.2rem 2.5rem;margin:0 5px;border:1px solid #8d8d8d;background:#fff}
+}
+.k-flatcolorpicker .k-color-value {
+    margin: 0 35px 0 0;
+}
+.k-selected-color-display {
+    border-radius: 5px;
+}
+.k-flatcolorpicker :nth-child(1) { order: 3; }
+.k-flatcolorpicker :nth-child(2) { order: 1; }
+.k-flatcolorpicker :nth-child(3) { order: 2; }
+.k-flatcolorpicker :nth-child(4) { order: 4; }
+
+.k-flatcolorpicker .k-controls {
+
+    padding-bottom: 5px;
+}
+.k-button.k-primary.apply{color:#000;padding:0.2rem 2.5rem;margin:0 5px;border:1px solid #8d8d8d;background:#fff}
 .k-button.k-primary.apply:hover{background:#efefef;color:#000}
 .k-button.cancel{color:#000;padding:0.2rem 2.5rem;margin:0 5px;border:1px solid #8d8d8d;background:#fff}
 .k-button.cancel:hover{background:#efefef;color:#000}
 span.active {
     border: 4px solid #010101;
+}
+#tab-panel-2 .popup-content {
+    padding-left: 10px;
 }
 
 /* .color-picker-wrapper{
@@ -146,7 +149,7 @@ a.sp-cancel {
             <div class="maker-sidebar__tab-body-container should-translate">
                 <div class="maker-sidebar__tab-body" style="min-height: auto; overflow: hidden scroll;">
                     <div class="tab-content">
-                        <article class="tab-pane container active" id="tab-panel-1">
+                        <article class="tab-pane container active " id="tab-panel-1">
                             <h2>Edit text here</h2>
                             <hr/>
                             <input type="text" id="text_field" class="input-text" value="Logo Text Here" placeholder="Ariga">
@@ -174,37 +177,32 @@ a.sp-cancel {
 									<div class="popup-overlay popupfake">
 										<div class="popup-content">
                                             <div id="textfontcolor">
-												 
-
-												<div class="demo-section k-content">
-													<div class="box-col">
-														 
-														<div id="flatcolorpicker" data-role="flatcolorpicker"></div>      
+                                                <div class="demo-section k-content">
+													<div class="box-col"> 
+                                                        <div id="flatcolorpicker" data-role="flatcolorpicker"></div>      
 													</div>
-                                                <div class="gradient-color">
-                                                    <p class="mt-4 mb-1">Gradient Color</p>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(252, 227, 138)" data-color2="rgb(243, 129, 129)" style="background: linear-gradient(rgb(252, 227, 138), rgb(243, 129, 129));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(248, 77, 158)" data-color2="rgb(255, 116, 117)" style="background: linear-gradient(rgb(248, 77, 158), rgb(255, 116, 117));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(23, 234, 217)" data-color2="rgb(96, 120, 234)" style="background: linear-gradient(rgb(23, 234, 217), rgb(96, 120, 234));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(98, 39, 116)" data-color2="rgb(197, 51, 100)" style="background: linear-gradient(rgb(98, 39, 116), rgb(197, 51, 100));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(113, 23, 234)" data-color2="rgb(234, 96, 96)" style="background: linear-gradient(rgb(113, 23, 234), rgb(234, 96, 96));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(180, 236, 81)" data-color2="rgb(66, 147, 33)" style="background: linear-gradient(rgb(180, 236, 81), rgb(66, 147, 33));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(250, 217, 97)" data-color2="rgb(247, 107, 28)" style="background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(245, 81, 95)" data-color2="rgb(159, 4, 27)" style="background: linear-gradient(rgb(245, 81, 95), rgb(159, 4, 27));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(48, 35, 174)" data-color2="rgb(200, 109, 215)" style="background: linear-gradient(rgb(48, 35, 174), rgb(200, 109, 215));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(66, 230, 149)" data-color2="rgb(59, 178, 184)" style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(91, 36, 122)" data-color2="rgb(27, 206, 223)" style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
-                                                    <span class="color-picker text-gradient" data-color1="rgb(101, 121, 155)" data-color2="rgb(94, 37, 99)" style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
+                                                    <div class="gradient-color">
+                                                        <p class="mt-4 mb-1">Gradient Color</p>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(252, 227, 138)" data-color2="rgb(243, 129, 129)" style="background: linear-gradient(rgb(252, 227, 138), rgb(243, 129, 129));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(248, 77, 158)" data-color2="rgb(255, 116, 117)" style="background: linear-gradient(rgb(248, 77, 158), rgb(255, 116, 117));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(23, 234, 217)" data-color2="rgb(96, 120, 234)" style="background: linear-gradient(rgb(23, 234, 217), rgb(96, 120, 234));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(98, 39, 116)" data-color2="rgb(197, 51, 100)" style="background: linear-gradient(rgb(98, 39, 116), rgb(197, 51, 100));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(113, 23, 234)" data-color2="rgb(234, 96, 96)" style="background: linear-gradient(rgb(113, 23, 234), rgb(234, 96, 96));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(180, 236, 81)" data-color2="rgb(66, 147, 33)" style="background: linear-gradient(rgb(180, 236, 81), rgb(66, 147, 33));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(250, 217, 97)" data-color2="rgb(247, 107, 28)" style="background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(245, 81, 95)" data-color2="rgb(159, 4, 27)" style="background: linear-gradient(rgb(245, 81, 95), rgb(159, 4, 27));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(48, 35, 174)" data-color2="rgb(200, 109, 215)" style="background: linear-gradient(rgb(48, 35, 174), rgb(200, 109, 215));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(66, 230, 149)" data-color2="rgb(59, 178, 184)" style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(91, 36, 122)" data-color2="rgb(27, 206, 223)" style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
+                                                        <span class="color-picker text-gradient" data-color1="rgb(101, 121, 155)" data-color2="rgb(94, 37, 99)" style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
+                                                    </div>
+                                                    <p class="text-center mt-3">
+                                                        <button id="donebuttontext"class="btn btn-primary donebtn">DONE</button>
+                                                        <button class="btn btn-primary donebtn cancel">CANCEL</button>
+                                                    </p>
                                                 </div>
-												<p class="text-center mt-3">
-                                                    <button id="donebuttontext"class="btn btn-primary donebtn">DONE</button>
-                                                    <button class="btn btn-primary donebtn cancel">CANCEL</button>
-												</p>
-                                                </div>
-                                                
-											</div>
-											 
-										</div>
+                                            </div>
+                                        </div>
 									</div>
 								</div>
                             </div>
@@ -296,52 +294,45 @@ a.sp-cancel {
                             
                             
                         </article>
-                        <article class="tab-pane container" id="tab-panel-2">
+                        <article class=" tab-pane container active " id="tab-panel-2">
                             <h2>Edit Logo Colours</h2>
                             <hr/>
-                            <p class="mb-1">Recommended Color</p>
-                            <span id="" class="color-picker add-color" style="background-color: rgb(255, 255, 255);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(250, 125, 127);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(129, 5, 10);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(148, 6, 13);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(147, 7, 13);"></span>
-                            
-                            <p class="mt-4 mb-1">Logo Color</p>
-                            <span id="" class="color-picker" style="background-color: rgb(252, 103, 106);"></span>
-                            
-                            <p class="mt-4 mb-1">Default Color</p>
-                            <span id="" class="color-picker" style="background-color: rgb(0, 0, 0);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(84, 84, 85);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(115, 115, 115);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(165, 165, 165);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(217, 217, 216);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(255, 255, 255);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(253, 89, 92);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(252, 106, 195);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(202, 113 228);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(139, 91, 251);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(85, 118, 251);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(64, 184, 252);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(253, 145, 85);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(254, 189, 97);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(254, 221, 100);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(202, 227, 109);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(130, 214, 96);"></span>
-                            <span id="" class="color-picker" style="background-color: rgb(99, 224, 229);"></span>
-                            
-                            <p class="mt-4 mb-1">Gradient Color</p>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(252, 227, 138), rgb(243, 129, 129));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(248, 77, 158), rgb(255, 116, 117));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(23, 234, 217), rgb(96, 120, 234));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(98, 39, 116), rgb(197, 51, 100));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(113, 23, 234), rgb(234, 96, 96));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(180, 236, 81), rgb(66, 147, 33));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(245, 81, 95), rgb(159, 4, 27));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(48, 35, 174), rgb(200, 109, 215));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
-                            <span id="" class="color-picker" style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
+                            <div class="logo-colors">
+                                <div class="color-pickerPopup">
+                                    <div id="logo-colors-spans" >
+                                        <div class="popup-overlay popupfake" style="">
+                                            <div class="popup-content">
+                                                <div id="logo-color"> 
+                                                    <div class="demo-section k-content">
+                                                        <div class="box-col">
+                                                            <div id="logocolorpicker" data-role="flatcolorpicker"></div>      
+                                                        </div>
+                                                        <div class="gradient-color">
+                                                            <p class="mt-4 mb-1">Gradient Color</p>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(252, 227, 138)" data-color2="rgb(243, 129, 129)" style="background: linear-gradient(rgb(252, 227, 138), rgb(243, 129, 129));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(248, 77, 158)" data-color2="rgb(255, 116, 117)" style="background: linear-gradient(rgb(248, 77, 158), rgb(255, 116, 117));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(23, 234, 217)" data-color2="rgb(96, 120, 234)" style="background: linear-gradient(rgb(23, 234, 217), rgb(96, 120, 234));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(98, 39, 116)" data-color2="rgb(197, 51, 100)" style="background: linear-gradient(rgb(98, 39, 116), rgb(197, 51, 100));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(113, 23, 234)" data-color2="rgb(234, 96, 96)" style="background: linear-gradient(rgb(113, 23, 234), rgb(234, 96, 96));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(180, 236, 81)" data-color2="rgb(66, 147, 33)" style="background: linear-gradient(rgb(180, 236, 81), rgb(66, 147, 33));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(250, 217, 97)" data-color2="rgb(247, 107, 28)" style="background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(245, 81, 95)" data-color2="rgb(159, 4, 27)" style="background: linear-gradient(rgb(245, 81, 95), rgb(159, 4, 27));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(48, 35, 174)" data-color2="rgb(200, 109, 215)" style="background: linear-gradient(rgb(48, 35, 174), rgb(200, 109, 215));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(66, 230, 149)" data-color2="rgb(59, 178, 184)" style="background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(91, 36, 122)" data-color2="rgb(27, 206, 223)" style="background: linear-gradient(rgb(91, 36, 122), rgb(27, 206, 223));"></span>
+                                                            <span class="color-picker logo-gradient" data-color1="rgb(101, 121, 155)" data-color2="rgb(94, 37, 99)" style="background: linear-gradient(rgb(101, 121, 155), rgb(94, 37, 99));"></span>
+                                                        </div>
+                                                        <p class="text-center mt-3">
+                                                            <button id="donebuttonlogo"class="btn btn-primary donebtn">DONE</button>
+                                                            <button class="btn btn-primary donebtn cancel">CANCEL</button>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </article>
                         <article class="tab-pane container" id="tab-panel-3">
                             <h2>Edit Background</h2>
@@ -451,19 +442,19 @@ a.sp-cancel {
             </div> 
             <div class="maker-sidebar__tab-nav">
                 <div class="maker-sidebar__tab-button-container tabs-list">
-                    <div class="maker-sidebar__tab-button">
+                    <div class="maker-sidebar__tab-button" id="text-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/text-icon.svg')}}" alt="" /><br/>Text</div>
                     </div>
-                    <div class="maker-sidebar__tab-button">
+                    <div class="maker-sidebar__tab-button" id="logo-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-logo.svg')}}" alt="" /><br/>Logo</div>
                     </div>
-                    <div class="maker-sidebar__tab-button">
+                    <div class="maker-sidebar__tab-button" id="bg-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-bg.svg')}}" alt="" /><br/>Background</div>
                     </div>
-                    <div class="maker-sidebar__tab-button">
+                    <div class="maker-sidebar__tab-button" id="layout-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-layout.svg')}}" alt="" /><br/>Layout</div>
                     </div>
-                    <div class="maker-sidebar__tab-button">
+                    <div class="maker-sidebar__tab-button" id="shape-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-shapes.svg')}}" alt="" /><br/>Shapes</div>
                     </div>
                 </div>
@@ -577,7 +568,7 @@ text = new fabric.Text(
       defaultLeft =text.left;
       defaultTop =text.top;
      
-    var svgUrl="{{asset('/site/img/logo-icon.svg')}}"; 
+    var svgUrl="{{asset('/site/img/castle.svg')}}"; 
     fabric.loadSVGFromURL(svgUrl, function(objects, options) {
     var obj = fabric.util.groupSVGElements(objects, options); 
     obj.scaleToHeight(100);
@@ -588,12 +579,38 @@ text = new fabric.Text(
      
     
     });
+     
+    obj.customType='logo';
+    var svgColor="";
+    // console.log(obj._objects);
+    if (obj.isSameColor && obj.isSameColor() || !obj._objects) {
+            // obj.fill='#008000';
+            // console.log(obj.fill);
+            svgColor=`<span id="svg-picker-0" data-customid="0" class="color-picker svg-path-picker" style="background-color: ${obj.fill};"></span>`;
+            $('#logo-colors-spans').append(svgColor);
+             
+                obj.customId=0;
+                // debugger;
 
+                 
+        } else if (obj._objects) {
+            for (var i = 0; i < obj._objects.length; i++) {
+                
+
+
+                svgColor=`<span id="svg-picker-${i+1}" data-customid="${i+1}" class="color-picker svg-path-picker" style="background-color: ${obj._objects[i].fill};"></span>`;
+                $('#logo-colors-spans').append(svgColor);
+                obj._objects[i].customId=i+1;
+
+            }
+        }
+     
     canvas.add(obj); 
     canvas.renderAll();
     svgadded=obj;
+    console.log(canvas);
  
-  
+    
  
 });
 canvas.on('object:scaling', function(event) {
@@ -637,16 +654,41 @@ canvas.on('object:modified', function(event) {
 });
 canvas.on("selection:updated", function (e) {
     // console.log(e.selected[0].width);
+    $('.tab-content .tab-pane').removeClass('active');
+    $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
+ 
     if(e.selected[0].type=='text'){
-    selectedText(e);
+        selectedText(e); 
+        $('#tab-panel-1').addClass('active');
+        $('#text-tab-button').addClass('maker-sidebar__tab-button--active');
+    }else  if(e.selected[0].get('customType')=='logo'){
+        
+        $('#tab-panel-2').addClass('active');
+        $('#logo-tab-button').addClass('maker-sidebar__tab-button--active');
+        
     }
 });
 canvas.on("selection:created", function (e) {
     console.log("created");
+    $('.tab-content .tab-pane').removeClass('active');
+    $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
 
     if(e.selected[0].type=='text'){
-    selectedText(e);
+        selectedText(e);
+        $('#tab-panel-1').addClass('active');
+        $('#text-tab-button').addClass('maker-sidebar__tab-button--active');
+    }else  if(e.selected[0].get('customType')=='logo'){
+        $('#tab-panel-2').addClass('active');
+        $('#logo-tab-button').addClass('maker-sidebar__tab-button--active');
     }
+});
+canvas.on("selection:cleared", function (e) {
+     
+    $('.tab-content .tab-pane').removeClass('active');
+    $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
+    $('#tab-panel-3').addClass('active');
+    $('#bg-tab-button').addClass('maker-sidebar__tab-button--active');
+     
 });
 
 $(document).on('change keyup','#text_field', function(){
@@ -1104,7 +1146,7 @@ if(layoutType=="left"){
     
     var headTop=svgadded.top;
     
-    let sizeTxt=(txtTop/totaltxt)+10;
+    let sizeTxt=(txtTop/totaltxt+6);
         
 
     $.each( canvas._objects, function( key, value ) {
@@ -1116,7 +1158,7 @@ if(layoutType=="left"){
             canvas._objects[key].left=svgadded.left;
             
 
-            canvas._objects[key].top=headTop ;
+            canvas._objects[key].top=headTop;
             canvas._objects[key].originX='left';
             canvas._objects[key].originY='center';
             headTop = canvas._objects[key].top;
@@ -1235,10 +1277,10 @@ if(layoutType=="left"){
 
     });
     console.log("canvas:::"+canvas.width);
-console.log("Left:::"+svgadded.left);
-console.log("top:::"+svgadded.top);
-console.log("textLeft:::"+canvas._objects[0].left);
-console.log("textTop:::"+canvas._objects[0].top);
+    console.log("Left:::"+svgadded.left);
+    console.log("top:::"+svgadded.top);
+    console.log("textLeft:::"+canvas._objects[0].left);
+    console.log("textTop:::"+canvas._objects[0].top);
     
 
      

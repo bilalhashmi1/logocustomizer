@@ -6,8 +6,14 @@ $(document).ready(function() {
     var BgColor="#ffffff";
     var bckcolor1;
     var bckcolor2;
+    var PathColor="#ffffff";
+    var pathcolor1;
+    var pathcolor2;
     // background color or gradient flag variable
     var bckcolor=0;
+    // logo color or gradient flag variable
+    var logocolor=0;
+    var pathid;
     $('.tabs-list div:first').addClass('maker-sidebar__tab-button--active'),
     $('.tab-content .show-content:first').addClass('active');
     
@@ -22,17 +28,17 @@ $(document).ready(function() {
                $('.tab-content .tab-pane').removeClass('active');
                $('.tab-content .tab-pane:nth-child('+ nthChild +')').addClass('active');
            }
-       })
+    })
     
     
        
-    $('.color-picker').on('click', function() {
+    $(document).on('click','.color-picker', function() {
         $('.popup-overlay').hide();
         $parent_box = $(this).closest('.color-pickerPopup');
         $parent_box.siblings().find('.popup-overlay').hide();
         $parent_box.find('.popup-overlay').toggle();
     });
-    $(".cancel").click(function(e) {
+    $(document).on('click','.cancel', function(e) {
       $(".popup-overlay").hide();
     });
     $('#donebuttontext').on('click', function() {
@@ -72,10 +78,7 @@ $(document).ready(function() {
     // });
     // initialize widgets
         var x =kendo.init($("#textfontcolor"));
-     
-      
-         $('.popup-overlay').hide();
-         $('.popup-overlay').removeClass("popupfake");
+         
       
      $(" .cancel").click(function(e) {
         $(".popup-overlay").hide();
@@ -84,7 +87,7 @@ $(document).ready(function() {
      flatColorPicker.value("rgb(0,0,0)");
     //  console.log(flatColorPicker);
 
-         flatColorPicker.bind("change", function(e) {
+    flatColorPicker.bind("change", function(e) {
                
                fontColorchanged=e.value;
                GC=0;
@@ -112,7 +115,9 @@ $(document).ready(function() {
     });
     
     // canvas background color
-    var backgroundcolorpicker =kendo.init($("#canvas_background_color"));     
+    var backgroundcolorpicker =kendo.init($("#canvas_background_color"));
+    
+
     var backgroundColorPicker = $("#canvas_background_color_picker").data("kendoFlatColorPicker");
     backgroundColorPicker.value("rgb(0,0,0)");
     backgroundColorPicker.bind("change", function(e) {
@@ -120,14 +125,15 @@ $(document).ready(function() {
                 BgColor=e.value;
                 bckcolor=0;
  
-        });
+    });
+    
     $(document).on('click','#backgroundbtn',function(e) {
-            e.preventDefault();
+        e.preventDefault();
         if(bckcolor==0){
             canvas.backgroundColor=BgColor;
             canvas.renderAll();
             $('#picker5').css("background-color",BgColor); 
-             
+            
         }else if(bckcolor==1){
 
             let ctx = canvas.getContext('2d');
@@ -142,7 +148,47 @@ $(document).ready(function() {
         }
         $('.popup-overlay').hide();
 
-        });
+    });
+
+    // Logo Color Picker Modal
+    var logocolormodal =kendo.init($("#logo-color"));     
+    var logoColorPicker = $("#logocolorpicker").data("kendoFlatColorPicker");
+    logoColorPicker.value("rgb(0,0,0)");
+    logoColorPicker.bind("change", function(e) {
+        
+                $('.logo-gradient').removeClass('active');
+                PathColor=e.value;
+                logocolor=0;
+ 
+    });
+
+    $(document).on('click','#donebuttonlogo',function(e) {
+        e.preventDefault();
+        if(logocolor==0){
+             setlogopathcolor(pathid,PathColor,0);
+            $(`#svg-picker-${pathid}`).css("background-color",PathColor); 
+             
+             
+        }else if(logocolor==1){
+            setlogopathcolor(pathid,PathColor,1);
+            $(`#svg-picker-${pathid}`).css({background: `linear-gradient(${pathcolor1}, ${pathcolor2})`});
+            
+        }
+        canvas.renderAll();
+        canvas.requestRenderAll(); 
+        $('.popup-overlay').hide();
+        $('.logo-gradient').removeClass('active');
+
+    });
+
+    $(document).on("click", '.logo-gradient',function(e) {
+        logocolor=1;
+        $('.logo-gradient').removeClass('active');
+        $(this).addClass('active');
+        pathcolor1 =$(this).data('color1');
+        pathcolor2 =$(this).data('color2');
+        
+    });
     $(document).on("click", '.canvas-gradient',function(e) {
         bckcolor=1;
         $('.canvas-gradient').removeClass('active');
@@ -152,20 +198,6 @@ $(document).ready(function() {
         
     });
 
-    // $('.stroke-color-container .sp-input').after(`<div class="recommended-color" >
-    // <p class="mb-1">Recommended Color</p>
-    // <span id="" class="color-picker outline-color-picker" data-color="rgb(250, 125, 127);" style="background-color: rgb(250, 125, 127);"></span>
-    // <span id="" class="color-picker outline-color-picker" data-color="rgb(129, 5, 10);" style="background-color: rgb(129, 5, 10);"></span>
-    // <span id="" class="color-picker outline-color-picker" data-color="rgb(148, 6, 13);" style="background-color: rgb(148, 6, 13);"></span>
-    // <span id="" class="color-picker outline-color-picker" data-color="rgb(147, 7, 13);" style="background-color: rgb(147, 7, 13);"></span>
-    // </div>`);
-    // $('.shadow-color-container .sp-input').after(`<div class="recommended-color" >
-    // <p class="mb-1">Recommended Color</p>
-    // <span id="" class="color-picker outline-color-picker" data-color="rgb(250, 125, 127);" style="background-color: rgb(250, 125, 127);"></span>
-    // <span id="" class="color-picker outline-color-picker" data-color="rgb(129, 5, 10);" style="background-color: rgb(129, 5, 10);"></span>
-    // <span id="" class="color-picker outline-color-picker" data-color="rgb(148, 6, 13);" style="background-color: rgb(148, 6, 13);"></span>
-    // <span id="" class="color-picker outline-color-picker" data-color="rgb(147, 7, 13);" style="background-color: rgb(147, 7, 13);"></span>
-    // </div>`);
     
     $( ".stroke-color-container .gradient-color" ).remove();
     $( ".shadow-color-container .gradient-color" ).remove();
@@ -192,10 +224,7 @@ $(document).ready(function() {
             $('#distance-y-slider').val(distanceY);
             $('#distance-y-input').val(distanceY); 
      });
-    
-     
-    
-    
+ 
     $('.font-color-container').on('click', '.outline-color-picker',function(){
          
         let textColor=$(this).css("background-color"); 
@@ -368,7 +397,15 @@ $(document).ready(function() {
          
          
     });
+    $(document).on('click', '.svg-path-picker',function(){
+             
+         pathid= $(this).data('customid');
+         
+        
+         
 
+ 
+     });
     function fontcolortext(color){
         active = canvas.getActiveObject(); 
         
@@ -393,4 +430,73 @@ $(document).ready(function() {
        return lasttext;
 
     }
+
+    function setlogopathcolor(pid,pcolor,colortype){
+        
+           
+       for (let j = 0; j < canvas._objects.length; j++) {
+           console.log(canvas._objects[j].get('type'));
+        // debugger;
+            //    if(canvas._objects[j].get('type')=='path'){
+                if(canvas._objects[j].get('customType')=='logo'){
+                    if (canvas._objects[j].isSameColor && canvas._objects[j].isSameColor() || !canvas._objects[j]._objects) {  
+                        if(colortype==0){
+
+                            canvas._objects[j].set("fill", pcolor);
+                            console.log(pcolor);
+                            return true;
+
+                        }else if(colortype==1){
+                            let ctx = canvas.getContext('2d');
+                            let  logogradient = ctx.createLinearGradient( 0, 0,  0,  canvas._objects[j].height);
+                            logogradient.addColorStop(0, pathcolor1);
+                            logogradient.addColorStop(0.45, pathcolor2);  
+                            canvas._objects[j].set("fill", logogradient);
+                            console.log(pcolor);
+                            return true;
+                        }
+                        
+                        // debugger;
+                             
+                    } else if (canvas._objects[j]._objects) {
+                        
+
+                        for (var i = 0; i < canvas._objects[j]._objects.length; i++) {
+            
+                             if(canvas._objects[j]._objects[i].customId==pid){ 
+
+                                if(colortype==0){
+
+                                    canvas._objects[j]._objects[i].set("fill", pcolor);
+                                    console.log(pcolor);
+                                    return true;
+        
+                                }else if(colortype==1){
+                                    let ctx = canvas.getContext('2d');
+                                    let  logogradient = ctx.createLinearGradient( 0, 0,  0,  canvas._objects[j]._objects[i].height);
+                                    logogradient.addColorStop(0, pathcolor1);
+                                    logogradient.addColorStop(0.45, pathcolor2);  
+                                    canvas._objects[j]._objects[i].set("fill", logogradient);
+                                    console.log(logogradient);
+                                    return true;
+                                }
+
+                             }
+            
+                        }
+                    }
+
+
+                }
+
+            //    }
+       }
+
+        
+
+    }
+    $('.popup-overlay').removeClass("popupfake");  
+    $('.popup-overlay').hide();
+    $('#tab-panel-2').removeClass("active");  
+
     })
