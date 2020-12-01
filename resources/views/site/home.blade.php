@@ -442,19 +442,19 @@ a.sp-cancel {
             </div> 
             <div class="maker-sidebar__tab-nav">
                 <div class="maker-sidebar__tab-button-container tabs-list">
-                    <div class="maker-sidebar__tab-button" id="text-tab-button">
+                    <div class="maker-sidebar__tab-button" data-customType="Heading" id="text-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/text-icon.svg')}}" alt="" /><br/>Text</div>
                     </div>
-                    <div class="maker-sidebar__tab-button" id="logo-tab-button">
+                    <div class="maker-sidebar__tab-button" data-customType="logo" id="logo-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-logo.svg')}}" alt="" /><br/>Logo</div>
                     </div>
-                    <div class="maker-sidebar__tab-button" id="bg-tab-button">
+                    <div class="maker-sidebar__tab-button" data-customType="" id="bg-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-bg.svg')}}" alt="" /><br/>Background</div>
                     </div>
-                    <div class="maker-sidebar__tab-button" id="layout-tab-button">
+                    <div class="maker-sidebar__tab-button" data-customType="" id="layout-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-layout.svg')}}" alt="" /><br/>Layout</div>
                     </div>
-                    <div class="maker-sidebar__tab-button" id="shape-tab-button">
+                    <div class="maker-sidebar__tab-button" data-customType="" id="shape-tab-button">
                         <div class="maker-sidebar__tab-button-caption"><img class="img-responsive" src="{{asset('/site/img/icon-shapes.svg')}}" alt="" /><br/>Shapes</div>
                     </div>
                 </div>
@@ -791,10 +791,9 @@ for(var k = 0; k < gfonts.length; k++){
 //   $(".save").html(canvas.toSVG());
 // });
 $('#compile').click(function(){
- $('#myModal').modal('show')
+  $('#myModal').modal('show')
   var imgList = '';
   var fontoption = '';
-//   console.log('imgList');
   var j = 0;
   $('.multImages').empty();
   

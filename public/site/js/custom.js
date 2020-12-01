@@ -17,7 +17,7 @@ $(document).ready(function() {
     $('.tabs-list div:first').addClass('maker-sidebar__tab-button--active'),
     $('.tab-content .show-content:first').addClass('active');
     
-    $('.tabs-list div').click(function(e) {
+    $(document).on('click','.tabs-list div',function(e) {
            event.preventDefault();
            if(!$(this).hasClass('maker-sidebar__tab-button--active')) {
                var tabIndex = $(this).index();
@@ -25,6 +25,14 @@ $(document).ready(function() {
                
                $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
                $(this).addClass('maker-sidebar__tab-button--active');
+                type=$(this).data('customtype');
+               if(type=="logo" || type=="Heading"){
+                selectcanvasobject(type);
+                canvas.renderAll();
+               }
+
+              
+
                $('.tab-content .tab-pane').removeClass('active');
                $('.tab-content .tab-pane:nth-child('+ nthChild +')').addClass('active');
            }
@@ -416,18 +424,18 @@ $(document).ready(function() {
         }
     }
    
-   function getlasttext(){
-       let lasttext;
-     
+    function getlasttext(){
+        let lasttext;
+        
 
-       for (let index = 0; index < canvas._objects.length; index++) {
-               if(canvas._objects[index].get('type')=='text'){
-                 lasttext=canvas._objects[index];
+        for (let index = 0; index < canvas._objects.length; index++) {
+                if(canvas._objects[index].get('type')=='text'){
+                    lasttext=canvas._objects[index];
 
-               }
-       }
+                }
+        }
 
-       return lasttext;
+        return lasttext;
 
     }
 
@@ -494,6 +502,13 @@ $(document).ready(function() {
 
         
 
+    }
+    function selectcanvasobject(type){
+        canvas.getObjects().forEach(function(o) {
+            if(o.customType == type) {
+                canvas.setActiveObject(o);
+            }
+        })
     }
     $('.popup-overlay').removeClass("popupfake");  
     $('.popup-overlay').hide();
