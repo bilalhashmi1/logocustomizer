@@ -83,6 +83,9 @@ span.select2-selection.select2-selection--single {
 span.select2-selection.select2-selection--single:focus{
     outline: unset;
 }
+.active-font{
+    border: 1px solid black !important;
+}
 /* .color-picker-wrapper{
     display: inline;
 }

@@ -34,10 +34,40 @@
         @include('layouts.site.includes.footer')
     </div>
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="multImages row">
+            </div>
+          </div>
+        </div>
+      </div> --}}
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">See option</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <ul class="fonts--tabs">
+                <li class="menu__active-tab"><a><span style="font-family: &quot;Bree Serif&quot;;">TRADITIONAL(SERIF)</span></a></li>
+                <li class=""><a><span style="font-family: Bevan;">BOLD</span></a></li>
+                <li class=""><a><span style="font-family: &quot;Honey Script&quot;;">VINTAGE</span></a></li>
+                <li class=""><a><span style="font-family: Roundo;">MODERN(SANS)</span></a></li>
+                <li class=""><a><span style="font-family: Douar;">FUNKY</span></a></li>
+                <li class=""><a><span style="font-family: Knewave;">HANDWRITTEN</span></a></li>
+                <li class=""><a><span>OTHER</span></a></li>
+              </ul>
+              <div class="row multImages">
+                 
+              
+              </div>
+            <div class="modal-footer text-center">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="savefonts" type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>

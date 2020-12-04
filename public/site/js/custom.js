@@ -14,6 +14,8 @@ $(document).ready(function() {
     // logo color or gradient flag variable
     var logocolor=0;
     var pathid;
+    var fonttext;
+    var opt_id;
     $('.tabs-list div:first').addClass('maker-sidebar__tab-button--active'),
     $('.tab-content .show-content:first').addClass('active');
     $(document).on('click','.tabs-list div',function(e){
@@ -292,16 +294,24 @@ $(document).ready(function() {
     }
     });
     $(document).on('click', '.fontname',function(){
-    let fonttext= $(this).data('font');
-    var text = canvas.getActiveObject();
-    let opt_id=slug(fonttext);
-    $('#'+opt_id).prop('selected', true);
-    text.fontFamily = fonttext;
-    canvas.renderAll();
-    $('#myModal').modal('hide');
+        $('.font-wrapper').removeClass('active-font');
+        $(this).parent().addClass('active-font');
+        fonttext= $(this).data('font');
+        opt_id=slug(fonttext);
+        
+    
 
 
     });
+    $(document).on('click','#savefonts', function(){
+    var text = canvas.getActiveObject();
+    $('#font_select').val(fonttext);
+    $('#font_select').select2().trigger('change');
+    // $('#'+opt_id).prop('selected', true);
+    text.fontFamily = fonttext;
+    canvas.renderAll();
+    $('#exampleModal').modal('hide');
+    })
     var lastleft;
     $("#text_btn").on("click", function(e) {
     let fontfamily=$('#font_select').val();
@@ -331,7 +341,7 @@ $(document).ready(function() {
     canvas.setActiveObject(text1);
     });
     $('#compile').click(function(){
-    $('#myModal').modal('show')
+    $('#exampleModal').modal('show')
     var imgList = '';
     var fontoption = '';
     var j = 0;
@@ -341,7 +351,8 @@ $(document).ready(function() {
     // setStyle(text, 'fontFamily', gfonts[i]);
     text.fontFamily = "'"+gfonts[i]+"'";
     let imgData  = canvas.toDataURL('png');
-    imgList = `<div  class="col-md-6"><div class="font-wrapper"> <img data-font="${gfonts[i]}" class="fontname" src="${imgData}"/></div></div>`;
+    // imgList = `<div  class="col-md-6"><div class="font-wrapper"> <img data-font="${gfonts[i]}" class="fontname" src="${imgData}"/></div></div>`;
+    imgList = `<div class="col-md-4 mb-4 text-center"> <div class="font-wrapper"><img data-font="${gfonts[i]}" class="fontname img-responsive" src="${imgData}" style="width:500px;  " ></div> <p><small>${gfonts[i]}</small></p></div>`;
     $('.multImages').append(imgList);
     }
     });

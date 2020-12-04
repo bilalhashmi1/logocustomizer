@@ -88,7 +88,7 @@ width: 100%;display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;disp
 	-webkit-flex-grow: 1;
 	-ms-flex-positive: 1;
 	flex-grow: 1;
-	width: 100%;
+	width: 100%; 
 	height: auto;
 	background-color: #efefef;
 	overflow: hidden;
@@ -663,3 +663,31 @@ order: 1;
 .popupfake{
 	left:-200%;
 }
+
+/*--04Dec2020--*/
+.fonts--tabs{padding:0;}
+.fonts--tabs>li {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+	margin-right:10px;
+}
+.font-wrapper {
+    border: 1px solid #d0d0d0;
+    background-color: #fff;
+    border-radius: .1875rem;
+    -webkit-transition: .25s ease-out,.25s ease-out;
+    transition: .25s ease-out,.25s ease-out;
+    height: calc(100% - 20px);
+    margin-bottom: 0px;
+    width: 100%;
+    text-align: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+}
+.font-wrapper:hover {-webkit-box-shadow:0 10px 20px 0 rgba(0,0,0,.2);box-shadow:0 10px 20px 0 rgba(0,0,0,.2)}
+
