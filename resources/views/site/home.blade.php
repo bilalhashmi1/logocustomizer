@@ -539,7 +539,6 @@ a.sp-cancel {
 
 <script> 
     var gfonts = JSON.parse(gfl);
-    //   console.log(gfonts.length);
     WebFont.load({
                 google: { 
                        families: gfonts
@@ -562,397 +561,223 @@ var HideControls = {
     'mb':false,
     'mtr':true
   };
-  var gfonts = JSON.parse(gfl);
+var gfonts = JSON.parse(gfl);
     // create a wrapper around native canvas element (with id="c")
 var canvas = new fabric.Canvas('c',{backgroundColor : "white"});
 var allText=[];
+// Setting Height, Width of canvas
 canvas.setWidth($("#canvas_frame").width());
 canvas.setHeight($("#canvas_frame").height());
 
  var defaultLeft="";
  var defaultTop="";
-text = new fabric.Text(
-            'Logo Text Here', { 
-            fontFamily: 'Arial',
-            fontSize: 60,
-            textAlign: 'center', 
-            centeredScaling: false,
-            lockUniScaling: true,
-            objectCaching:false  });
-
-    //     canvas.add(text);
-        text.customType='Heading';
-    //   canvas.centerObject(text);
+/* Adding Default Text Heading */
+    text = new fabric.Text(
+                'Logo Text Here', { 
+                fontFamily: 'Arial',
+                fontSize: 60,
+                textAlign: 'center', 
+                centeredScaling: false,
+                lockUniScaling: true,
+                objectCaching:false 
+    }); 
+    text.customType='Heading'; 
     text.setControlsVisibility(HideControls);
-
-
-        canvas.setActiveObject(text);
-        // text._clearCache();
-
-        // console.log(text);
-        canvas.add(text);
-      canvas.centerObject(text);
-      canvas.renderAll();
-        
-      defaultLeft =text.left;
-      defaultTop =text.top;
-     
+    canvas.setActiveObject(text);
+    canvas.add(text);
+    canvas.centerObject(text);
+    canvas.renderAll();    
+    defaultLeft =text.left;
+    defaultTop =text.top;
+/* Adding Default Text Heading End */
+/** Adding Default Logo Function **/ 
     var svgUrl="{{asset('/site/img/castle.svg')}}"; 
-    fabric.loadSVGFromURL(svgUrl, function(objects, options) {
-    var obj = fabric.util.groupSVGElements(objects, options); 
-    obj.scaleToHeight(100);
-    obj.set({
+    fabric.loadSVGFromURL(svgUrl, function(objects, options){
+        var obj = fabric.util.groupSVGElements(objects, options); 
+        obj.scaleToHeight(100);
+        // formula left: (text.left+(text.width/2)-obj.width) 
+        obj.set({ 
+            left:text.left+(text.width/2),
+            top :text.top, 
+            originX:'center',
+            originY:'bottom',
+        });
         
-        left: (text.left+(text.width/2)-obj.width) ,
-        top: text.top-100,
-     
-    
-    });
-     
-    obj.customType='logo';
-    var svgColor="";
-    // console.log(obj._objects);
-    if (obj.isSameColor && obj.isSameColor() || !obj._objects) {
-            // obj.fill='#008000';
-            // console.log(obj.fill);
-            svgColor=`<span id="svg-picker-0" data-customid="0" class="color-picker svg-path-picker" style="background-color: ${obj.fill};"></span>`;
-            $('#logo-colors-spans').append(svgColor);
-             
+        obj.customType='logo';
+        var svgColor="";
+        // Getting Logo Layer Colors and appending into html
+            if(obj.isSameColor && obj.isSameColor() || !obj._objects){ 
+                svgColor=`<span id="svg-picker-0" data-customid="0" class="color-picker svg-path-picker" style="background-color: ${obj.fill};"></span>`;
+                $('#logo-colors-spans').append(svgColor);
                 obj.customId=0;
-                // debugger;
+            } else if (obj._objects) {
+                for (var i = 0; i < obj._objects.length; i++) {
+                    // solid color check
+                    if (typeof obj._objects[i].fill === 'string'){
+                        svgColor=`<span id="svg-picker-${i+1}" data-customid="${i+1}" class="color-picker svg-path-picker" style="background-color: ${obj._objects[i].fill};"></span>`;
+                        $('#logo-colors-spans').append(svgColor);
+                        obj._objects[i].customId=i+1;
+                        console.log("bbbb");
+                        console.log(obj._objects[i].fill);
+                    // gradient color check 
+                    }else{
+                        svgColor=`<span id="svg-picker-${i+1}" data-customid="${i+1}" class="color-picker svg-path-picker" style="background-color: ${obj._objects[i].fill};"></span>`;
+                        $('#logo-colors-spans').append(svgColor);
+                        obj._objects[i].customId=i+1;
+                        console.log("bbbb");
+                        console.log(obj._objects[i].fill);
 
-                 
-        } else if (obj._objects) {
-            for (var i = 0; i < obj._objects.length; i++) {
-                
-                if (typeof obj._objects[i].fill === 'string'){
-                    svgColor=`<span id="svg-picker-${i+1}" data-customid="${i+1}" class="color-picker svg-path-picker" style="background-color: ${obj._objects[i].fill};"></span>`;
-                $('#logo-colors-spans').append(svgColor);
-                obj._objects[i].customId=i+1;
-                console.log("bbbb");
-                console.log(obj._objects[i].fill);
-                   
-                }else{
-                svgColor=`<span id="svg-picker-${i+1}" data-customid="${i+1}" class="color-picker svg-path-picker" style="background-color: ${obj._objects[i].fill};"></span>`;
-                $('#logo-colors-spans').append(svgColor);
-                obj._objects[i].customId=i+1;
-                console.log("bbbb");
-                console.log(obj._objects[i].fill);
 
+                    }
+
+                    
 
                 }
-
-                
-
             }
-        }
-     
-    canvas.add(obj); 
-    canvas.renderAll();
-    svgadded=obj;
-    console.log(canvas);
- 
-    
- 
-});
-canvas.on('object:scaling', function(event) {
-    if(event.target){
-        // console.log(event.target.height);
-        if(event.target.type=='text'){ 
-            // $("#font-input, #font-slider ").val((event.target.fontSize * event.target.scaleX).toFixed(0));
-        } 
-    }
-});
-canvas.on('object:modified', function(event) {
-     
-     
-    if (event.target) {
-        if(event.target.type=='text'){
-            // console.log('beforescalex='+event.target.fontSize);
-        event.target.fontSize *= event.target.scaleX;
-        // console.log('afterscalex='+event.target.fontSize);
-        // console.log('final='+event.target.fontSize.toFixed(0));
-            let finalfontsize=event.target.fontSize.toFixed(0);
-            if(finalfontsize>=200){
-                finalfontsize=200;
-            }
-        event.target.fontSize = finalfontsize;
-        event.target.scaleX = 1;
-        event.target.scaleY = 1;
-        event.target._clearCache();
-        // console.log('tofixed='+event.target.fontSize.toFixed(0));
-        // console.log('scaleX='+event.target.scaleX);
-         
-
-        if(finalfontsize==199){
-            $("#font-input, #font-slider").val(200);
-
-        }else{
-                $("#font-input, #font-slider").val(finalfontsize);
-
-        }
-        }
-    }
-});
-canvas.on("selection:updated", function (e) {
-    // console.log(e.selected[0].width);
-    $('.tab-content .tab-pane').removeClass('active');
-    $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
- 
-    if(e.selected[0].type=='text'){
-        selectedText(e); 
-        $('#tab-panel-1').addClass('active');
-        $('#text-tab-button').addClass('maker-sidebar__tab-button--active');
-    }else  if(e.selected[0].get('customType')=='logo'){
         
-        $('#tab-panel-2').addClass('active');
-        $('#logo-tab-button').addClass('maker-sidebar__tab-button--active');
-        
-    }
-});
-canvas.on("selection:created", function (e) {
-    console.log("created");
-    $('.tab-content .tab-pane').removeClass('active');
-    $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
-
-    if(e.selected[0].type=='text'){
-        selectedText(e);
-        $('#tab-panel-1').addClass('active');
-        $('#text-tab-button').addClass('maker-sidebar__tab-button--active');
-    }else  if(e.selected[0].get('customType')=='logo'){
-        $('#tab-panel-2').addClass('active');
-        $('#logo-tab-button').addClass('maker-sidebar__tab-button--active');
-    }
-});
-canvas.on("selection:cleared", function (e) {
-     
-    $('.tab-content .tab-pane').removeClass('active');
-    $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
-    $('#tab-panel-3').addClass('active');
-    $('#bg-tab-button').addClass('maker-sidebar__tab-button--active');
-     
-});
-
-$(document).on('change keyup','#text_field', function(){
-    // console.log(canvas.object);
-    active = canvas.getActiveObject();  
-    if(active.get('type')=='text'){
-        
-    active.text=$(this).val(); 
-    canvas.renderAll();
-    }
- });
-
-
- var readFile = function(e) {
-  inputforupload = e.target;
-  readerobj = new FileReader();
-  var imgObj;
-  readerobj.onload = function(){
-    var imgElement = document.createElement('img');
-    imgElement.src = readerobj.result;
-    imgElement.onload = function() {
-      var cw = $(".canvas-container").width();
-      var ch = $(".canvas-container").height();
-      let scaleWidth = 0.3 * cw;
-      let scaleHeight = 0.3 * ch;
-      let scaleCorner = 0.1 * (cw+ch);
-      var imageinstance = new fabric.Image(imgElement, {
-        angle: 0,
-        opacity: 1,
-        cornerSize: scaleCorner,
-      });
-    //  imageinstance.setControlsVisibility(HideControls);
-    var filter = new fabric.Image.filters.RemoveColor({
-      threshold: 0.2,
-      distance:0.5
-    });
-    imageinstance.filters.push(filter);
-    var contrast = new fabric.Image.filters.Contrast({ contrast: 1});
-    imageinstance.filters.push(contrast);
-
-
-
- 
-
-    imageinstance.applyFilters();
-
-    canvas.add(imageinstance);
-    canvas.centerObject(imageinstance);
-    canvas.renderAll();
-};
-};
-readerobj.readAsDataURL(inputforupload.files[0]);
-$('#filereader').val('');
-};
-/** Upload Image Function end**/
-var slug = function(str) {
-    var $slug = '';
-    var trimmed = $.trim(str);
-    $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
-    replace(/-+/g, '-').
-    replace(/^-|-$/g, '');
-    return $slug.toLowerCase();
-}
-var temp_id = "";
-for(var k = 0; k < gfonts.length; k++){
-    temp_id=slug(gfonts[k]);
-     
-    fontoption=`<option class="fontoptions ${gfonts[k]}" id="${temp_id}" style="font-family: '${gfonts[k]}';" value="${gfonts[k]}">${gfonts[k]}</option>`;
-    $('#font_select').append(fontoption);
-
-}
-$('#font_select').select2({
-    minimumResultsForSearch: Infinity
-});
-/** image filters **/
-// document.getElementById('filereader').addEventListener('change', readFile);
-// $("#rect").on("click", function(e) {
-//   rect = new fabric.Rect({
-//     left: 40,
-//     top: 40,
-//     width: 50,
-//     height: 50,      
-//     fill: 'transparent',
-//     stroke: 'green',
-//     strokeWidth: 5,
-//   });  
-//   canvas.add(rect);
-// });
-
-// $("#circ").on("click", function(e) {
-//   rect = new fabric.Circle({
-//     left: 40,
-//     top: 40,
-//     radius: 50,     
-//     fill: 'transparent',
-//     stroke: 'green',
-//     strokeWidth: 5,
-//   });  
-//   canvas.add(rect);
-// });
-
-// $("#save").on("click", function(e) {
-//   $(".save").html(canvas.toSVG());
-// });
-$('#compile').click(function(){
-  $('#myModal').modal('show')
-  var imgList = '';
-  var fontoption = '';
-  var j = 0;
-  $('.multImages').empty();
-  
-  for(var i = 0; i < gfonts.length; i++) {
-
-    var text = canvas.getActiveObject();
-    // setStyle(text, 'fontFamily', gfonts[i]);
-    text.fontFamily = "'"+gfonts[i]+"'";
-    let imgData  = canvas.toDataURL('png');
-    imgList = `<div  class="col-md-6"><div class="font-wrapper"> <img data-font="${gfonts[i]}" class="fontname" src="${imgData}"/></div></div>`;
-    
-    $('.multImages').append(imgList);
-  }
-   
-
-});
- 
-function setStyle(object, styleName, value) {
-  if (object.setSelectionStyles && object.isEditing) {
-    var style = { };
-    style[styleName] = value;
-    object.setSelectionStyles(style).setCoords();
-  }
-  else {
-    var style = { };
-    style[styleName] = value;
-    object.set(style).setCoords();
-  }
-  canvas.renderAll();
-};
- 
-    
-
-    $('.fontsize').on('keyup  change' , function(e) {
-        active = canvas.getActiveObject();
-        let font_Size=$(this).val(); 
-            
-        if(font_Size>=200){
-            font_Size=200;
-            
-        }
-
-        
-
-        $('#font-slider').val(font_Size);
-        $('#font-input').val(font_Size);
-        if(active.get('type')=='text'){
-             if(font_Size==200){
-                active.set("fontSize",199);
-
-             }else{
-                active.set("fontSize",font_Size);
-
-             }
-            
-
-            
-            $('#font-input').val(font_Size);
-            canvas.renderAll();
-        }
-    });
-
-  $('#font_select').on('change' , function() {
-    active = canvas.getActiveObject();
-    if(active.get('type')=='text')
-    { 
-    active.fontFamily = $(this).val();
-    canvas.renderAll();
-    }
-    $('#select2-font_select-container').css('fontFamily',$(this).val());
-  });
-
-
-  $(document).on('change', '#font-color-picker',function(){
-       
-      let fontColorPicker=$('#font-color-picker').val(); 
-        active = canvas.getActiveObject();
-    $('#picker0').css("background-color",fontColorPicker.toHexString());  
-    $('#font-color-input').val(fontColorPicker.toHexString());
-
-    if(active.get('type')=='text'){  
-        active.fill=fontColorPicker.toHexString();
+        canvas.add(obj); 
         canvas.renderAll();
-    }
-    
-  });
-  
-  $(document).on('change', '#font-color-input',function(){
-      let fontColorInput=$(this).val();
-     
-      if (fontColorInput.match(/^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/)) {
-        let flatColorPicker1 = $("#flatcolorpicker").data("kendoFlatColorPicker");
-     
-        flatColorPicker1.value("rgb(0,0,0)");
-        
-        // $('#font-color-picker').val(fontColorInput);
-        $('#picker0').css("background-color",fontColorInput);
-        active = canvas.getActiveObject(); 
-        if(active.get('type')=='text'){
+        svgadded=obj;
+        console.log(canvas);
+    });
+/** Adding Default Logo Function End **/ 
+// Object Scaling in canvas Event
+    canvas.on('object:scaling', function(event) {
+        if(event.target){ 
+            if(event.target.type=='text'){ 
+                // $("#font-input, #font-slider ").val((event.target.fontSize * event.target.scaleX).toFixed(0));
+            } 
+        }
+    });
+// Object Modified in canvas Event
+    canvas.on('object:modified', function(event) {
+        if(event.target){
+        if(event.target.type=='text'){
+            event.target.fontSize *= event.target.scaleX;
+            let finalfontsize=event.target.fontSize.toFixed(0);
+                    if(finalfontsize>=200){
+                        finalfontsize=200;
+                    }
+            event.target.fontSize = finalfontsize;
+            event.target.scaleX = 1;
+            event.target.scaleY = 1;
+            event.target._clearCache();
+            if(finalfontsize==199){
+                $("#font-input, #font-slider").val(200);
+            }else{
+                    $("#font-input, #font-slider").val(finalfontsize);
+            }
+        }
+        }
+    });
+// Selection in Canvas Event
+    canvas.on("selection:updated", function (e) {
+        $('.tab-content .tab-pane').removeClass('active');
+        $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
+        if(e.selected[0].type=='text'){
+            selectedText(e); 
+            $('#tab-panel-1').addClass('active');
+            $('#text-tab-button').addClass('maker-sidebar__tab-button--active');
+        }else if(e.selected[0].get('customType')=='logo'){ 
+            $('#tab-panel-2').addClass('active');
+            $('#logo-tab-button').addClass('maker-sidebar__tab-button--active');
             
-            active.fill=fontColorInput;
+        }
+    });
+// Selection Created in canvas Event
+    canvas.on("selection:created", function (e) { 
+        $('.tab-content .tab-pane').removeClass('active');
+        $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active'); 
+        if(e.selected[0].type=='text'){
+            selectedText(e);
+            $('#tab-panel-1').addClass('active');
+            $('#text-tab-button').addClass('maker-sidebar__tab-button--active');
+        }else  if(e.selected[0].get('customType')=='logo'){
+            $('#tab-panel-2').addClass('active');
+            $('#logo-tab-button').addClass('maker-sidebar__tab-button--active');
+        }
+    });
+// When nothing selected in canvas Event
+    canvas.on("selection:cleared", function (e) { 
+        $('.tab-content .tab-pane').removeClass('active');
+        $('.tabs-list div.maker-sidebar__tab-button--active').removeClass('maker-sidebar__tab-button--active');
+        $('#tab-panel-3').addClass('active');
+        $('#bg-tab-button').addClass('maker-sidebar__tab-button--active');
+    });
+var readFile = function(e) {
+    inputforupload = e.target;
+    readerobj = new FileReader();
+    var imgObj;
+    readerobj.onload = function(){
+        var imgElement = document.createElement('img');
+        imgElement.src = readerobj.result;
+        imgElement.onload = function(){
+            var cw = $(".canvas-container").width();
+            var ch = $(".canvas-container").height();
+            let scaleWidth = 0.3 * cw;
+            let scaleHeight = 0.3 * ch;
+            let scaleCorner = 0.1 * (cw+ch);
+            var imageinstance = new fabric.Image(imgElement, {
+            angle: 0,
+            opacity: 1,
+            cornerSize: scaleCorner,
+            });
+            //  imageinstance.setControlsVisibility(HideControls);
+            var filter = new fabric.Image.filters.RemoveColor({
+            threshold: 0.2,
+            distance:0.5
+            });
+            imageinstance.filters.push(filter);
+            var contrast = new fabric.Image.filters.Contrast({ contrast: 1});
+            imageinstance.filters.push(contrast);
+            imageinstance.applyFilters();
+            canvas.add(imageinstance);
+            canvas.centerObject(imageinstance);
             canvas.renderAll();
-        }
-    }else{
-            $('#font-color-input').val(null);
-        }
-       
-    
-    
-
-    
-    
-  });
-   /** Delete Active Object **/
+        };
+    };
+    readerobj.readAsDataURL(inputforupload.files[0]);
+    $('#filereader').val('');
+};
+/** Fonts Load Function **/
+    var slug = function(str) {
+        var $slug = '';
+        var trimmed = $.trim(str);
+        $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
+        replace(/-+/g, '-').
+        replace(/^-|-$/g, '');
+        return $slug.toLowerCase();
+    }
+    var temp_id = "";
+    for(var k = 0; k < gfonts.length; k++){
+        temp_id=slug(gfonts[k]);
+        fontoption=`<option class="fontoptions ${gfonts[k]}" id="${temp_id}" style="font-family: '${gfonts[k]}';" value="${gfonts[k]}">${gfonts[k]}</option>`;
+        $('#font_select').append(fontoption);
+    }
+    $('#font_select').select2({
+        minimumResultsForSearch: Infinity
+    });
+/** Fonts Load Function End **/
+/* $("#save").on("click", function(e) {
+    $(".save").html(canvas.toSVG());
+   });
+*/
+/** Set Style on object Function  **/
+    function setStyle(object, styleName, value) {
+    if (object.setSelectionStyles && object.isEditing) {
+        var style = { };
+        style[styleName] = value;
+        object.setSelectionStyles(style).setCoords();
+    }
+    else {
+        var style = { };
+        style[styleName] = value;
+        object.set(style).setCoords();
+    }
+    canvas.renderAll();
+    };
+/** Set Style on object Function End **/
+/** Delete Active Object  Function**/
   $(document).on('click', '#delete_btn' ,function() {
     if (canvas.getActiveObject()) {
       canvas.remove(canvas.getActiveObject());
@@ -965,25 +790,20 @@ function setStyle(object, styleName, value) {
       }
     }
   });
-  /** Delete Active Object **/
-function selectedText(e){
-    var slug2 = function(str) {
-    var $slug2 = '';
-    var trimmed2 = $.trim(str);
-    $slug2 = trimmed2.replace(/[^a-z0-9-]/gi, '-').
-    replace(/-+/g, '-').
-    replace(/^-|-$/g, '');
-    return $slug2.toLowerCase();
-    }
-    // console.log(e.selected[0].type);
-    
-        // console.log(e.selected[0]);
-        // console.log(e.selected[0].strokeWidth);
-        // console.log(e.selected[0].shadow);
+/** Delete Active Object Function End**/
+/** Getting Text all properties and assiging to input function**/
+    function selectedText(e){
+        var slug2 = function(str) {
+        var $slug2 = '';
+        var trimmed2 = $.trim(str);
+        $slug2 = trimmed2.replace(/[^a-z0-9-]/gi, '-').
+        replace(/-+/g, '-').
+        replace(/^-|-$/g, '');
+        return $slug2.toLowerCase();
+        }
         let selectedText= e.selected[0].text;
         let selectedFontsize= e.selected[0].fontSize;
-        let selectedFontFamily= e.selected[0].fontFamily;
-        // console.log(selectedFontFamily);
+        let selectedFontFamily= e.selected[0].fontFamily; 
         let opt_id=slug2(selectedFontFamily);
         $('#'+opt_id).prop('selected', true);
         let selectedTextColor= e.selected[0].fill;
@@ -991,16 +811,14 @@ function selectedText(e){
         let selectedTextstrokColor= e.selected[0].stroke;
         let selectedTextshadow= e.selected[0].shadow;
         if(selectedFontsize==199){
-            $("#font-input, #font-slider").val(200);
-
-            }else{
+            $("#font-input, #font-slider").val(200); 
+        }else{
             $("#font-input, #font-slider").val(selectedFontsize);
 
-            }
+        }
         $('#text_field').val(selectedText);
         $('#picker0').css('background-color',selectedTextColor);
         $('#font-color-input').val(selectedTextColor);
-
         if(selectedTextstrokColor==null){
             $('#text-outline').prop("checked", false);
             $('#outline_fields').hide();
@@ -1046,500 +864,362 @@ function selectedText(e){
 
 
         }
+            
         
-    
-}
-function rgba2hex(orig) {
-    var a, isPercent,
-    rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
-    alpha = (rgb && rgb[4] || "").trim(),
-    hex = rgb ?
-    (rgb[1] | 1 << 8).toString(16).slice(1) +
-    (rgb[2] | 1 << 8).toString(16).slice(1) +
-    (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
-
-    if (alpha !== "") {
-        a = alpha;
-    } else {
-        a = 01;
     }
-    // multiply before convert to HEX
-    a = ((a * 255) | 1 << 8).toString(16).slice(1)
-    hex = hex + a;
-    return (hex && hex.length === 8) ? "#" +hex : hex;
+/** Getting Text all properties and assiging to input function END**/
+/** RGB to HEXA Color converter function **/ 
+    function rgba2hex(orig) {
+        var a, isPercent,
+        rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
+        alpha = (rgb && rgb[4] || "").trim(),
+        hex = rgb ?
+        (rgb[1] | 1 << 8).toString(16).slice(1) +
+        (rgb[2] | 1 << 8).toString(16).slice(1) +
+        (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
 
-}
-active1= canvas.getActiveObject();
-// console.log(active1);
-// var sel = canvas.getObjects() ;
-        let oldwidth=canvas._offset.left;
-        // let oldheight=$('#canvas_frame').height();
-        var sizeWidth = [];
-        var sizeHeight = [];
-        var index=0;
-        if($(window).width() <768 ){
-      //     $('.canvas-container-body').height($('#canvas_frame').height()+40);
-         }
-         if($(window).width() <468 ){
-     
-             
-         }
-              
-if($(window).width() < 550)
-{
-    handle_resize();
-}
+        if (alpha !== "") {
+            a = alpha;
+        } else {
+            a = 01;
+        }
+        // multiply before convert to HEX
+        a = ((a * 255) | 1 << 8).toString(16).slice(1)
+        hex = hex + a;
+        return (hex && hex.length === 8) ? "#" +hex : hex;
 
-$(window).resize(function() {
-    
- if (canvas.getWidth() != $("#canvas_frame").width() && $(window).width() <= 1380 ) {
-//    console.log('frame width');
-//    console.log($("#canvas_frame").width());
-//     console.log('canvas width');
-//    console.log(canvas.width);
-            var scaleMultiplier = $("#canvas_frame").width() / canvas.width;
-           
-            var objects = canvas.getObjects();
-            for (var i in objects) {
-                // console.log('object scale x');
-                //  console.log(objects[i].scaleX );
-                objects[i].scaleX = objects[i].scaleX * scaleMultiplier;
-                objects[i].scaleY = objects[i].scaleY * scaleMultiplier;
-                objects[i].left = objects[i].left * scaleMultiplier;
-                objects[i].top = objects[i].top * scaleMultiplier;
-                objects[i].setCoords();
-            }
-//   console.log(scaleMultiplier);
-            canvas.setWidth(canvas.getWidth() * scaleMultiplier);
-            canvas.setHeight(canvas.getHeight() * scaleMultiplier);
-            canvas.renderAll();
-            canvas.calcOffset();
-        
- }
-
-            index++;
-});
-function rescale_canvas_if_needed(){
-    var optimal_dimensions = [500,500];
-    var scaleFactorX=window.innerWidth/optimal_dimensions[0];
-    var scaleFactorY=window.innerHeight/optimal_dimensions[1];
-    if(scaleFactorX <  scaleFactorY && scaleFactorX < 1) {
-        canvas.setWidth(optimal_dimensions[0] *scaleFactorX);
-        canvas.setHeight(optimal_dimensions[1] *scaleFactorX);
-      //  canvas.setZoom(scaleFactorX);
-         canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * scaleFactorX);
-    } else if(scaleFactorX >  scaleFactorY && scaleFactorY < 1){
-        canvas.setWidth(optimal_dimensions[0] *scaleFactorY);
-        canvas.setHeight(optimal_dimensions[1] *scaleFactorY);
-        //canvas.setZoom(scaleFactorY);
-        canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * scaleFactorY);
-    }else {
-        canvas.setWidth(optimal_dimensions[0] );
-        canvas.setHeight(optimal_dimensions[1] );
-        //canvas.setZoom(1);
-           canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * 1);
     }
-
-    canvas.calcOffset();
-    canvas.renderAll();
-}
-
- 
-function handle_resize(){
-    $(".canvas-container").hide();
-    rescale_canvas_if_needed();
-    $(".canvas-container").show();               
-     
-}
-var resizeId = null;
-/*$(function() {
+/** RGB to HEXA Color converter function End **/ 
+/**  Responsiveness Code  **/ 
+    let oldwidth=canvas._offset.left;
+    // let oldheight=$('#canvas_frame').height();
+    var sizeWidth = [];
+    var sizeHeight = [];
+    var index=0;
+    if($(window).width() <768 ){
+        //     $('.canvas-container-body').height($('#canvas_frame').height()+40);
+        }
+        if($(window).width() <468 ){ 
+            
+        }
+            
+    if($(window).width() < 550)
+    {
+        handle_resize();
+    }
+/**  Responsiveness Code End  **/ 
+/**  Canvas Resize Function  **/ 
     $(window).resize(function() {
-        if(resizeId != null)
-        clearTimeout(resizeId);
+    if(canvas.getWidth() != $("#canvas_frame").width() && $(window).width() <= 1380 ) {
+        //    console.log('frame width');
+        //    console.log($("#canvas_frame").width());
+        //     console.log('canvas width');
+        //    console.log(canvas.width);
+        var scaleMultiplier = $("#canvas_frame").width() / canvas.width; 
+        var objects = canvas.getObjects();
+        for (var i in objects) {
+            // console.log('object scale x');
+            //  console.log(objects[i].scaleX );
+            objects[i].scaleX = objects[i].scaleX * scaleMultiplier;
+            objects[i].scaleY = objects[i].scaleY * scaleMultiplier;
+            objects[i].left = objects[i].left * scaleMultiplier;
+            objects[i].top = objects[i].top * scaleMultiplier;
+            objects[i].setCoords();
+        }
+        //   console.log(scaleMultiplier);
+        canvas.setWidth(canvas.getWidth() * scaleMultiplier);
+        canvas.setHeight(canvas.getHeight() * scaleMultiplier);
+        canvas.renderAll();
+        canvas.calcOffset();       
+    }
+    index++;
+    });
+    function rescale_canvas_if_needed(){
+        var optimal_dimensions = [500,500];
+        var scaleFactorX=window.innerWidth/optimal_dimensions[0];
+        var scaleFactorY=window.innerHeight/optimal_dimensions[1];
+        if(scaleFactorX <  scaleFactorY && scaleFactorX < 1) {
+            canvas.setWidth(optimal_dimensions[0] *scaleFactorX);
+            canvas.setHeight(optimal_dimensions[1] *scaleFactorX);
+        //  canvas.setZoom(scaleFactorX);
+            canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * scaleFactorX);
+        } else if(scaleFactorX >  scaleFactorY && scaleFactorY < 1){
+            canvas.setWidth(optimal_dimensions[0] *scaleFactorY);
+            canvas.setHeight(optimal_dimensions[1] *scaleFactorY);
+            //canvas.setZoom(scaleFactorY);
+            canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * scaleFactorY);
+        }else {
+            canvas.setWidth(optimal_dimensions[0] );
+            canvas.setHeight(optimal_dimensions[1] );
+            //canvas.setZoom(1);
+            canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * 1);
+        }
+
+        canvas.calcOffset();
+        canvas.renderAll();
+    }
+
+    function handle_resize(){
+        $(".canvas-container").hide();
+        rescale_canvas_if_needed();
+        $(".canvas-container").show();               
+        
+    }
+    var resizeId = null;
+    /*$(function() {
+        $(window).resize(function() {
+            if(resizeId != null)
+            clearTimeout(resizeId);
+            resizeId = setTimeout(handle_resize, 500);
+        });
+        console.log( "ready!" );
+
         resizeId = setTimeout(handle_resize, 500);
-     });
-    console.log( "ready!" );
+    }); */
+/**  Canvas Resize Function End  **/ 
+/** Layout Module Function  **/
+    var layoutType;
+    var resetCanvas="";
+    var txtTop=canvas.height/4;
+    var sel1;
+    var state=0;
+    var tobjs=0;
 
-    resizeId = setTimeout(handle_resize, 500);
-}); */
-var layoutType;
-var resetCanvas="";
-var txtTop=canvas.height/4;
-var sel1;
-var state=0;
-function layout(type){
-
-    
-       
- layoutType=type;
- if(state==0){
-    myjson = JSON.stringify(canvas);
-    state++;
- }
-         
-if(layoutType=="left"){
-    // canvas.clear().renderAll();
-    // canvas.loadFromJSON(myjson);
-    // canvas.renderAll();
-    
-   
-    svgadded.scaleToHeight(txtTop);
-    svgadded.set('left',(svgadded.width*svgadded.scaleX));
-    svgadded.set('top',canvas.height/2);
-    svgadded.set('originX','right');
-    svgadded.set('originY','center');
-    text.set('fontSize',txtTop);
-    
-    
-    
-    svgadded.setCoords();
-    text.setCoords();
-
-    canvas.renderAll(); 
-    // active = canvas.getActiveObject();  
-    let totaltxt=canvas._objects.length-1;
-    
-    var headTop=svgadded.top;
-    
-    let sizeTxt=(txtTop/totaltxt);
-        
-    
-    $.each( canvas._objects, function( key, value ) {
-         
-        
-       if(canvas._objects[key].get('type')=='text'){
-        allText.push(canvas._objects[key]);
-        if(canvas._objects[key].customType == 'Heading'){
-
-            canvas._objects[key].set('fontSize',sizeTxt.toFixed(0));
-            // canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX);
-            canvas._objects[key].set('left',svgadded.left);
-            
-
-            canvas._objects[key].set('top',headTop);
-            canvas._objects[key].set('originX','left');
-            canvas._objects[key].set('originY','center');
-            headTop = canvas._objects[key].top;
-            canvas._objects[key].setCoords();
-            canvas.renderAll();
-             
-             
-                
-        }else{
-            // canvas._objects[key].set('fontSize',(sizeTxt/2).toFixed(0));
-            // // canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX);
-            // canvas._objects[key].set('left',svgadded.left);
-
-            // if(canvas._objects[key-1].get('type')=='text'){
-            //    canvas._objects[key].set('top',headTop+canvas._objects[key-1].height);
-
-
-            // }else{
-            //    canvas._objects[key].set('top',headTop+canvas._objects[key-2].height);
-
-
-            // }
-            // // canvas._objects[key].set('originX','left');
-            // // canvas._objects[key].set('originY','center');
-            // headTop = canvas._objects[key].top;
-            // canvas._objects[key].setCoords();
+    function layout(type){
+        layoutType=type;
+        tobjs=canvas._objects.length-1;
+        if(state==0){
+            myjson = JSON.stringify(canvas);
+            state++;
+        }
+        if(layoutType=="left"){
+            // canvas.clear().renderAll();
+            // canvas.loadFromJSON(myjson);
             // canvas.renderAll();
-             
-             
+            svgadded.scaleToHeight(txtTop);
+            svgadded.set('left',(svgadded.width*svgadded.scaleX));
+            svgadded.set('top',canvas.height/2);
+            svgadded.set('originX','right');
+            svgadded.set('originY','center');
+            text.set('fontSize',txtTop);
+            svgadded.setCoords();
+            text.setCoords();
+            canvas.renderAll(); 
+            // textwidth=canvas.width-((svgadded.width*svgadded.scaleX)+20);
+            // active = canvas.getActiveObject();  
+            let totaltxt=canvas._objects.length-1;
+            var headTop=svgadded.top;
+            let sizeTxt=(txtTop/totaltxt);
+            $.each( canvas._objects, function( key, value ) {
+                if(canvas._objects[key].get('type')=='text'){
+                    allText.push(canvas._objects[key]);
+                    if(canvas._objects[key].customType == 'Heading'){
+                        if(tobjs==1){
+                        canvas._objects[key].set('fontSize',60);
+
+                        }else{
+                        canvas._objects[key].set('fontSize',sizeTxt.toFixed(0));
+
+                        }
+                        // canvas._objects[key].scaleToHeight(textwidth); 
+                        console.log(canvas._objects[key].width)
+                        console.log(canvas._objects[key].fontSize)
+                        // canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX);
+                        canvas._objects[key].set('left',svgadded.left);
+                        canvas._objects[key].set('top',headTop);
+                        canvas._objects[key].set('originX','left');
+                        canvas._objects[key].set('originY','center');
+                        headTop = canvas._objects[key].top;
+                        canvas._objects[key].setCoords();
+                        canvas.renderAll();
+                    }else{
+                        canvas._objects[key].set('fontSize',(sizeTxt/2).toFixed(0));
+                        // canvas._objects[key].left=svgadded.left+(svgadded.width*svgadded.scaleX);
+                        canvas._objects[key].set('left',svgadded.left);
+                        if(canvas._objects[key-1].get('type')=='text'){
+                            canvas._objects[key].set('top',headTop+canvas._objects[key-1].height);
+                        }else{
+                            canvas._objects[key].set('top',headTop+canvas._objects[key-2].height);
+                        }
+                        canvas._objects[key].set('originX','left');
+                        canvas._objects[key].set('originY','center');
+                        headTop = canvas._objects[key].top;
+                        canvas._objects[key].setCoords();
+                        canvas.renderAll();
+                    }
+                }
+            
+
+
+            });
+        }else if(layoutType=="right"){
+            svgadded.scaleToHeight(txtTop);
+            svgadded.set('left',canvas.width-(svgadded.width*svgadded.scaleX+30));
+            svgadded.set('top',(canvas.height/2));
+            svgadded.set('originX','left');
+            svgadded.set('originY','center');
+            text.set('fontSize',txtTop);
+            svgadded.setCoords();
+            text.setCoords();
+            canvas.renderAll(); 
+            // active = canvas.getActiveObject();  
+            let totaltxt=canvas._objects.length-1;
+            var headTop=svgadded.top;
+            let sizeTxt=(txtTop/totaltxt);    
+            $.each( canvas._objects, function( key, value ) {
+                if(canvas._objects[key].get('type')=='text'){
+                    allText.push(canvas._objects[key]);
+                    if (canvas._objects[key].customType == 'Heading'){
+                        if(tobjs==1){
+                            canvas._objects[key].set('fontSize',60);
+                        }else{
+                            canvas._objects[key].set('fontSize',sizeTxt.toFixed(0));
+                        }
+                        canvas._objects[key].set('left',svgadded.left);
+                        canvas._objects[key].set('top',headTop);
+                        canvas._objects[key].set('originX','right');
+                        canvas._objects[key].set('originY','center');
+                        // canvas._objects[key].originY='center';
+                        headTop = canvas._objects[key].top;
+                        canvas._objects[key].setCoords();
+                        canvas.renderAll(); 
+                        // console.log("head left"+canvas._objects[key].left);
+                            
+                    }else{
+                        canvas._objects[key].set('fontSize',(sizeTxt/2).toFixed(0));
+                        canvas._objects[key].set('left',svgadded.left);
+                        if(canvas._objects[key-1].get('type')=='text'){
+                            canvas._objects[key].set('top',headTop+canvas._objects[key-1].height);
+                        }else{
+                            canvas._objects[key].set('top',headTop+canvas._objects[key-2].height);
+                        }
+                        canvas._objects[key].set('originX','right');
+                        canvas._objects[key].set('originY','center');
+                        headTop = canvas._objects[key].top;
+                        canvas._objects[key].setCoords();
+                        canvas.renderAll(); 
+                        
+
+
+                    }
+                }
+            });
+            canvas.requestRenderAll();
+            canvas.renderAll();  
+        }else if(layoutType=="top"){
+            svgadded.scaleToHeight(txtTop);
+            svgadded.left=canvas.width/2 ;
+            svgadded.top=canvas.height/2;
+            svgadded.originX='center';
+            svgadded.originY='bottom';
+            text.fontSize=txtTop;
+            svgadded.setCoords();
+            text.setCoords();
+            canvas.renderAll(); 
+            active = canvas.getActiveObject();  
+            let totaltxt=canvas._objects.length-1;
+            var headTop=svgadded.top;
+            var headLeft=svgadded.left;
+            let sizeTxt=(txtTop/totaltxt);
+            $.each( canvas._objects, function( key, value ) {
+                if(canvas._objects[key].get('type')=='text'){
+                    if (canvas._objects[key].customType == 'Heading'){
+                        if(tobjs==1){
+                            canvas._objects[key].set('fontSize',60);
+                        }else{
+                            canvas._objects[key].set('fontSize',sizeTxt.toFixed(0));
+                        }
+                        canvas._objects[key].left=svgadded.left;
+                        canvas._objects[key].top=svgadded.top ;
+                        canvas._objects[key].originX='center'; 
+                        canvas._objects[key].originY='top';
+                        headTop = canvas._objects[key].top;
+                        headLeft = canvas._objects[key].left;
+                        canvas._objects[key].setCoords();
+                        canvas.renderAll(); 
+                        // console.log("head left"+canvas._objects[key].left);
+                    }else{
+                        canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);;
+                        // canvas._objects[key].top=headTop;
+                        if(canvas._objects[key-1].get('type')!=='text'){
+                            canvas._objects[key].top=headTop+canvas._objects[key-2].height;
+
+                        }else{
+                            canvas._objects[key].top=headTop+canvas._objects[key-1].height;
+
+                        }
+                        canvas._objects[key].left=headLeft;
+                        canvas._objects[key].originX='center';
+                        canvas._objects[key].originY='top';
+                        headTop = canvas._objects[key].top;
+                        canvas._objects[key].setCoords();
+                        canvas.renderAll(); 
+                        
+
+
+                    }
+                }
+            });
+        }else if(layoutType=="bottom"){
+            svgadded.scaleToHeight(txtTop);
+            svgadded.left=canvas.width/2 ;
+            svgadded.top=canvas.height/2;
+            svgadded.originX='center';
+            svgadded.originY='top';
+            text.fontSize=txtTop;
+            // console.log(svgadded.left+svgadded.width);
+            svgadded.setCoords();
+            text.setCoords();
+            canvas.renderAll(); 
+            active = canvas.getActiveObject();  
+            let totaltxt=canvas._objects.length-1;
+            var headTop=svgadded.top;
+            var headLeft=svgadded.left; 
+            let sizeTxt=(txtTop/totaltxt); 
+            $.each( canvas._objects, function( key, value ) {
+                if(canvas._objects[key].get('type')=='text'){
+                    if (canvas._objects[key].customType == 'Heading'){ 
+                        if(tobjs==1){
+                            canvas._objects[key].set('fontSize',60);
+                        }else{
+                            canvas._objects[key].set('fontSize',sizeTxt.toFixed(0));
+                        }
+                        canvas._objects[key].left=svgadded.left;
+                        canvas._objects[key].top=svgadded.top ;
+                        canvas._objects[key].originX='center';
+                        canvas._objects[key].originY='bottom';
+                        // canvas._objects[key].originY='center';
+                        headTop = canvas._objects[key].top;
+                        headLeft = canvas._objects[key].left;
+                        canvas._objects[key].setCoords();
+                        canvas.renderAll(); 
+                        // console.log("head left"+canvas._objects[key].left);
+                            
+                    }else{
+                        canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);;
+                        // canvas._objects[key].top=headTop;
+                        if(canvas._objects[key-1].get('type')!=='text'){
+                            canvas._objects[key].top=headTop-canvas._objects[key-2].height;
+                        }else{
+                            canvas._objects[key].top=headTop-canvas._objects[key-1].height;
+                        }
+                        canvas._objects[key].left=headLeft;
+                        canvas._objects[key].originX='center';
+                        canvas._objects[key].originY='bottom';
+                        headTop = canvas._objects[key].top;
+                        canvas._objects[key].setCoords();
+                        canvas.renderAll();
+                    }
+                }
+            });
+        }else if(layoutType=="reset"){
+            console.log("reset");
 
 
         }
-            
-
-       }
-    //    console.log(canvas);
-
-
-    });
-         
-            //    if(state==1){
-            //         canvas.clear().renderAll();
-            //         canvas.loadFromJSON(myjson);
-            //         canvas.renderAll();
-            //     }
-        // canvas.discardActiveObject();
-
-        //  sel1 = new fabric.ActiveSelection(allText, {
-        //   canvas: canvas,
-        //   top: svgadded.top,
-        //   left: svgadded.left,
-        //   originX:'left',
-        //   originY:'center',
-        //   dirty:true,
-
-        // });
-        
-        
-        // sel1.setCoords();
-        
-        $.each( allText, function( key, value ) {
-        
-            console.log(allText[key]);
-
-        });
-        canvas.setActiveObject(sel1);
-
-        // canvas.discardActiveObject();
-        canvas.requestRenderAll();
-        canvas.renderAll();
-        console.log("L SVG TOP"+svgadded.top);
-        console.log("L group TOP"+sel1.top);
-  
-
-
-     
-}else if(layoutType=="right"){
-     
-    // console.log(canvas);
-    svgadded.scaleToHeight(txtTop);
-    svgadded.set('left',canvas.width-(svgadded.width*svgadded.scaleX+30));
-    svgadded.set('top',(canvas.height/2));
-    svgadded.set('originX','left');
-    svgadded.set('originY','center');
-    text.set('fontSize',txtTop);
-    
-     
-    
-    svgadded.setCoords();
-    text.setCoords();
-
-    canvas.renderAll(); 
-    // active = canvas.getActiveObject();  
-    let totaltxt=canvas._objects.length-1;
-    
-    var headTop=svgadded.top;
-    
-    let sizeTxt=(txtTop/totaltxt);
-        
-
-    $.each( canvas._objects, function( key, value ) {
-       if(canvas._objects[key].get('type')=='text'){
-        allText.push(canvas._objects[key]);
-        if (canvas._objects[key].customType == 'Heading'){
-
-            canvas._objects[key].set('fontSize',sizeTxt.toFixed(0));
-            canvas._objects[key].set('left',svgadded.left);
-            canvas._objects[key].set('top',headTop);
-            canvas._objects[key].set('originX','right');
-            canvas._objects[key].set('originY','center');
-            // canvas._objects[key].originY='center';
-            headTop = canvas._objects[key].top;
-            canvas._objects[key].setCoords();
-            canvas.renderAll(); 
-            console.log("head left"+canvas._objects[key].left);
-                
-        }else{
-            canvas._objects[key].set('fontSize',(sizeTxt/2).toFixed(0));
-            canvas._objects[key].set('left',svgadded.left);
-
-            if(canvas._objects[key-1].get('type')=='text'){
-            canvas._objects[key].set('top',headTop+canvas._objects[key-1].height);
-
-
-            }else{
-            canvas._objects[key].set('top',headTop+canvas._objects[key-2].height);
-
-
-            }
-            canvas._objects[key].set('originX','right');
-            canvas._objects[key].set('originY','center');
-            headTop = canvas._objects[key].top;
-            canvas._objects[key].setCoords();
-            // canvas.renderAll(); 
-             
-
-
-        }
-            
-
-        }
-
-
-
-    });
-     
-        canvas.discardActiveObject();
-        sel1 = new fabric.ActiveSelection(allText, {
-          canvas: canvas,
-          top: svgadded.top,
-          left: svgadded.left,
-          originX:'right' ,
-          originY:'center' ,
-          dirty:true,
-        });
-        canvas.setActiveObject(sel1);
-        
-        // sel1.setCoords();
-       
-        canvas.requestRenderAll();
-
-        // canvas.discardActiveObject();
-        canvas.renderAll();
-
-        console.log("r SVG TOP"+svgadded.top);
-        console.log("r group TOP"+sel1.top);
-
-    
-
-     
-
-     
-}else if(layoutType=="top"){
-    svgadded.scaleToHeight(txtTop);
-    svgadded.left=canvas.width/2 ;
-    svgadded.top=canvas.height/2;
-    svgadded.originX='center';
-    svgadded.originY='bottom';
-    text.fontSize=txtTop;
-    
-    console.log(svgadded.left+svgadded.width);
-    
-    svgadded.setCoords();
-    text.setCoords();
-
-    canvas.renderAll(); 
-    active = canvas.getActiveObject();  
-    let totaltxt=canvas._objects.length-1;
-    
-    var headTop=svgadded.top;
-    var headLeft=svgadded.left;
-    
-    let sizeTxt=(txtTop/totaltxt);
-        
-
-    $.each( canvas._objects, function( key, value ) {
-       if(canvas._objects[key].get('type')=='text'){
-        if (canvas._objects[key].customType == 'Heading'){
-
-            canvas._objects[key].fontSize=sizeTxt.toFixed(0);
-            // canvas._objects[key].left=svgadded.left;
-            // canvas._objects[key].top=svgadded.top ;
-            // canvas._objects[key].originX='center'; 
-            // canvas._objects[key].originY='top';
-            headTop = canvas._objects[key].top;
-            headLeft = canvas._objects[key].left;
-            canvas._objects[key].setCoords();
-            canvas.renderAll(); 
-            console.log("head left"+canvas._objects[key].left);
-                
-        } else{
-            canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);;
-            // canvas._objects[key].top=headTop;
-            
-
-            if(canvas._objects[key-1].get('type')!=='text'){
-            // canvas._objects[key].top=headTop+canvas._objects[key-2].height;
-
-            }else{
-            // canvas._objects[key].top=headTop+canvas._objects[key-1].height;
-
-            }
-            // canvas._objects[key].left=headLeft;
-            // canvas._objects[key].originX='center';
-            // canvas._objects[key].originY='top';
-            headTop = canvas._objects[key].top;
-            canvas._objects[key].setCoords();
-            canvas.renderAll(); 
-             
-
-
-            }
-            
-
-       }
-       console.log(canvas);
-
-
-    });
-
-
-}else if(layoutType=="bottom"){
-    
-    svgadded.scaleToHeight(txtTop);
-    svgadded.left=canvas.width/2 ;
-    svgadded.top=canvas.height/2;
-    svgadded.originX='center';
-    svgadded.originY='top';
-    text.fontSize=txtTop;
-    
-    console.log(svgadded.left+svgadded.width);
-    
-    svgadded.setCoords();
-    text.setCoords();
-
-    canvas.renderAll(); 
-    active = canvas.getActiveObject();  
-    let totaltxt=canvas._objects.length-1;
-    
-    var headTop=svgadded.top;
-    var headLeft=svgadded.left;
-    
-    let sizeTxt=(txtTop/totaltxt);
-        
-
-    $.each( canvas._objects, function( key, value ) {
-       if(canvas._objects[key].get('type')=='text'){
-        if (canvas._objects[key].customType == 'Heading'){
-
-            canvas._objects[key].fontSize=sizeTxt.toFixed(0);
-            canvas._objects[key].left=svgadded.left;
-            canvas._objects[key].top=svgadded.top ;
-            canvas._objects[key].originX='center';
-            canvas._objects[key].originY='bottom';
-            // canvas._objects[key].originY='center';
-            headTop = canvas._objects[key].top;
-            headLeft = canvas._objects[key].left;
-            canvas._objects[key].setCoords();
-            canvas.renderAll(); 
-            console.log("head left"+canvas._objects[key].left);
-                
-        }else{
-            canvas._objects[key].fontSize=(sizeTxt/2).toFixed(0);;
-            // canvas._objects[key].top=headTop;
-            
-
-            if(canvas._objects[key-1].get('type')!=='text'){
-            canvas._objects[key].top=headTop-canvas._objects[key-2].height;
-
-            }else{
-            canvas._objects[key].top=headTop-canvas._objects[key-1].height;
-
-            }
-            canvas._objects[key].left=headLeft;
-            canvas._objects[key].originX='center';
-            canvas._objects[key].originY='bottom';
-
-            headTop = canvas._objects[key].top;
-            canvas._objects[key].setCoords();
-            canvas.renderAll(); 
-             
-
-
-            }
-            
-
-       }
-       console.log(canvas);
-
-
-    });
-
-
-}else if(layoutType=="reset"){
-    console.log("reset");
-
-
-}
-
-
-canvas.renderAll(); 
-
-}
+        canvas.renderAll(); 
+    }
+/** Layout Module Function End**/
 </script>
 @endsection
 @endsection
