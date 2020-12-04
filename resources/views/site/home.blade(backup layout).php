@@ -904,7 +904,7 @@ function setStyle(object, styleName, value) {
   $('#font_select').on('change' , function() {
     active = canvas.getActiveObject();
     if(active.get('type')=='text')
-    { 
+    {
     active.fontFamily = $(this).val();
     canvas.renderAll();
     }

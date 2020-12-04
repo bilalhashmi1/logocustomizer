@@ -517,7 +517,7 @@ $(document).ready(function() {
 
      
         $('.select2-results__option').each(function(){
-         
+        
             let fonts=$(this).html();
              $(this).css('fontFamily',fonts);
           });

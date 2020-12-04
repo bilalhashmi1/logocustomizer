@@ -13,9 +13,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" type="text/css">
         <link href="{{asset('/site/css/allfonts.css')}}" rel="stylesheet" type="text/css">
+        <link href="http://necolas.github.io/normalize.css/2.0.1/normalize.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css" integrity="sha512-KuSX+43gVS5MEIJD2ewtrFPOHqC1PJnL8o2f5ciggPC0JUZ8XV0QXlfArO1mSzKkVFdRjsBDfrTU96C5SuRfqQ==" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"   crossorigin="anonymous" />
-      
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
         @yield('styles')
     
@@ -52,7 +53,9 @@
     <script type="text/javascript" src="{{asset('/site/js/jquery.fontselect.js')}}"></script> 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.min.js" integrity="sha512-Pdu3zoEng2TLwwjnDne3O7zaeWZfEJHU5B63T+zLtME/wg1zfeSH/1wrtOzOC37u2Y1Ki8pTCdKsnbueOlFlMg==" crossorigin="anonymous"></script> --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js" integrity="sha512-1aNp9qKP+hKU/VJwCtYqJP9tdZWbMDN5pEEXXoXT0pTAxZq1HHZhNBR/dtTNSrHO4U1FsFGGILbqG1O9nl8Mdg==" crossorigin="anonymous"></script> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.0.0/fabric.min.js" integrity="sha512-UNjbffhZxF4EJpN3+MmCNzsQLp+Sv8TV9k1j69wQNlXwA0EwaL/AlKhv1on8TCC8kI7+V9VrAPoA0XGFIqE5kA==" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.0.0/fabric.min.js" integrity="sha512-UNjbffhZxF4EJpN3+MmCNzsQLp+Sv8TV9k1j69wQNlXwA0EwaL/AlKhv1on8TCC8kI7+V9VrAPoA0XGFIqE5kA==" crossorigin="anonymous"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.6/fabric.min.js" integrity="sha512-XcwgBTqf2CXR/nsswCV1e0j9CjXo87APyBsATK2/l7MvTpcIG0QYKA87v5KIJ4RS6ytArv2pWD6UcRorKhYp1A==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     @yield('scripts')
 
 </body> 
