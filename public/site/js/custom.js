@@ -293,11 +293,17 @@ $(document).ready(function() {
     }
     }
     });
-    $(document).on('click', '.fontname',function(){
-        $('.font-wrapper').removeClass('active-font');
-        $(this).parent().addClass('active-font');
+    $(document).on('click', '.font-names',function(){
+        // $('.single-font-wrapper').removeClass('active-font');
+        // $(this).parent().addClass('active-font');
         fonttext= $(this).data('font');
-        opt_id=slug(fonttext);
+        var text = canvas.getActiveObject();
+        $('#font_select').val(fonttext);
+        $('#font_select').select2().trigger('change');
+        // $('#'+opt_id).prop('selected', true);
+        text.fontFamily = fonttext;
+        canvas.renderAll();
+        document.getElementById("seeoption-div").style.width = "0";
         
     
 
@@ -340,20 +346,38 @@ $(document).ready(function() {
     text1.setControlsVisibility(HideControls);
     canvas.setActiveObject(text1);
     });
+
+    $(document).on('click','#preview', function(){
+        $('#previewmodal').modal('show');
+        logo_canvas = canvas; 
+        logo_canvas.setWidth(300);
+        logo_canvas.setHeight(300);
+        let logo  = logo_canvas.toDataURL('png');
+        $('#logo').attr("src", logo);
+        console.log(logo);
+    });
     $('#compile').click(function(){
-    $('#exampleModal').modal('show')
+    $('#exampleModal').modal('show');
     var imgList = '';
     var fontoption = '';
     var j = 0;
     $('.multImages').empty();
+    
+    banvas=canvas;
     for(var i = 0; i < gfonts.length; i++) {
-    var text = canvas.getActiveObject();
+        var text = canvas.getActiveObject();
+         
     // setStyle(text, 'fontFamily', gfonts[i]);
     text.fontFamily = "'"+gfonts[i]+"'";
-    let imgData  = canvas.toDataURL('png');
-    // imgList = `<div  class="col-md-6"><div class="font-wrapper"> <img data-font="${gfonts[i]}" class="fontname" src="${imgData}"/></div></div>`;
-    imgList = `<div class="col-md-4 mb-4 text-center"> <div class="font-wrapper"><img data-font="${gfonts[i]}" class="fontname img-responsive" src="${imgData}" style="width:500px;  " ></div> <p><small>${gfonts[i]}</small></p></div>`;
-    $('.multImages').append(imgList);
+    canvas.calcOffset();
+    canvas.renderAll();
+    // rescale_banvas_if_needed();
+   
+        let imgData  = banvas.toDataURL('png');
+        // imgList = `<div  class="col-md-6"><div class="font-wrapper"> <img data-font="${gfonts[i]}" class="fontname" src="${imgData}"/></div></div>`;
+        // imgList = `<div class="col-md-4 mb-4 text-center"> <div class="font-wrapper"><img data-font="${gfonts[i]}" class="fontname img-responsive" src="${imgData}"  ></div> <p><small>${gfonts[i]}</small></p></div>`;
+        imgList = `<div class="col-md-4 mb-4 text-center"><h2 style="font-family: ${gfonts[i]};">${text.text}</h2></div>`;
+        $('.multImages').append(imgList);
     }
     });
     $(document).on('click', '.svg-path-picker',function(){
@@ -385,6 +409,15 @@ $(document).ready(function() {
     }
     $('#select2-font_select-container').css('fontFamily',$(this).val());
     });
+    $(document).on('change keyup','#text_field', function(){
+        // console.log(canvas.object);
+        active = canvas.getActiveObject();  
+        if(active.get('type')=='text'){
+            
+        active.text=$(this).val(); 
+        canvas.renderAll();
+        }
+     });
     $(document).on('change', '#font-color-input',function(){
     let fontColorInput=$(this).val();
     if (fontColorInput.match(/^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/)) {
@@ -473,6 +506,30 @@ $(document).ready(function() {
     });
     });
 
+    function rescale_banvas_if_needed(){
+        var optimal_dimensions = [400,400];
+        var scaleFactorX=400/optimal_dimensions[0];
+        var scaleFactorY=400/optimal_dimensions[1];
+        if(scaleFactorX <  scaleFactorY && scaleFactorX < 1) {
+            banvas.setWidth(optimal_dimensions[0]*scaleFactorX);
+            banvas.setHeight(optimal_dimensions[1]*scaleFactorX);
+            //banvas.setZoom(scaleFactorX);
+            banvas.zoomToPoint(new fabric.Point(banvas.width/2, banvas.height/2), banvas.getZoom()*scaleFactorX);
+        } else if(scaleFactorX >  scaleFactorY && scaleFactorY < 1){
+            banvas.setWidth(optimal_dimensions[0]*scaleFactorY);
+            banvas.setHeight(optimal_dimensions[1]*scaleFactorY);
+            //banvas.setZoom(scaleFactorY);
+            banvas.zoomToPoint(new fabric.Point(banvas.width/2, banvas.height / 2), banvas.getZoom()*scaleFactorY);
+        }else {
+            banvas.setWidth(optimal_dimensions[0] );
+            banvas.setHeight(optimal_dimensions[1] );
+            //banvas.setZoom(1);
+            banvas.zoomToPoint(new fabric.Point(banvas.width / 2, banvas.height / 2), banvas.getZoom() * 1);
+        }
 
-
+        banvas.calcOffset();
+        banvas.renderAll();
+        
+    }
+    
 })

@@ -690,4 +690,13 @@ order: 1;
     cursor: pointer;
 }
 .font-wrapper:hover {-webkit-box-shadow:0 10px 20px 0 rgba(0,0,0,.2);box-shadow:0 10px 20px 0 rgba(0,0,0,.2)}
+/* See option */
+#seeoption-div {height: 100%; width: 0;position: fixed;z-index: 10000;top: 0;left: 0;background-color: #FFF;overflow-x: hidden;padding-top: 10px;transition: 0.5s;}
+#seeoption-div div.seeoptionIn{padding:15px;}
+#seeoption-div a {color:#000;font-size:22px;text-decoration: none;display: block;transition: 0.3s;}
+#seeoption-div a:hover {color: #fd364d;}
+#seeoption-div .closebtn {position: absolute;top: 15px;right: 25px;margin-left: 50px;padding:0 1px;}
+#seeoption-div .closebtn:hover {color: #000;}
+.font-names{border: 1px solid #d0d0d0;background-color: #fff;border-radius: 0.3rem;-webkit-transition: .25s ease-out,.25s ease-out;transition: .25s ease-out,.25s ease-out;margin-bottom: 0px;width: 100%;padding:14px 10px;text-align:center;font-size: 18px;color:#000;cursor: pointer;}
+.font-names:hover {border: 1px solid #3e9be9;-webkit-box-shadow:0 3px 6px 0 rgba(0,0,0,.2);box-shadow:0 3px 6px 0 rgba(0,0,0,.2)}
 

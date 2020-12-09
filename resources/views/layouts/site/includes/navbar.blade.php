@@ -8,7 +8,7 @@
                 <button class="btn btn-primary1"><< TRY ANOTHER LOGO</button>
             </div>
             <div class="col-lg-6 top-buttonmargin red-topBtn text-center">	
-                <button class="btn btn-primary"><img class="img-responsive" src="{{asset('/site/img/ic-view.png')}}" alt="" /> PREVIEW</button> <button class="btn btn-primary">SAVE LOGO & CONTINUE</button>
+                <button id="preview" class="btn btn-primary"><img class="img-responsive" src="{{asset('/site/img/ic-view.png')}}" alt="" /> PREVIEW</button> <button class="btn btn-primary">SAVE LOGO & CONTINUE</button>
             </div>
         </div>
     </div><!-- /.container-fluid -->

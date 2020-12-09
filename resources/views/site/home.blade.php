@@ -60,7 +60,7 @@ span.active {
     top: 8px;
 }
 span#select2-font_select-container {
-    padding-top: 2px;
+    font-size: 17px;
     line-height: 1.75;
 }
 span.select2-selection.select2-selection--single {
@@ -85,6 +85,10 @@ span.select2-selection.select2-selection--single:focus{
 }
 .active-font{
     border: 1px solid black !important;
+}
+.select2-results__option{
+    font-size: 20px;
+    padding-left:15px;
 }
 /* .color-picker-wrapper{
     display: inline;
@@ -196,7 +200,18 @@ a.sp-cancel {
                             <select id="font_select" class="select-input">
                                 
                             </select>
-                            <button title="Add text" id="compile" class="btn btn-secondary">See option ></button>
+                            <button onclick="openNav()" class="seeoption-toggle btn btn-secondary">See option ></button>
+                            <div id="seeoption-div">
+                                <div class="seeoptionIn">
+                                    <h3><a href="javascript:void(0)" onclick="closeNav()"><img class="img-responsive" src="{{asset('/site/img/backArrow.png')}}" alt="" />	BACK</a></h3>
+                                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img class="img-responsive" src="{{asset('/site/img/closebtn.svg')}}" alt="" />	</a>
+                                    <hr/>
+                                    <div id="fonts-dropdown-wrapper">
+                                    
+                                      
+                                    </div>
+                                </div>
+                            </div>
                             <br>
                             <div class="font-style-picker">
                                 <div class="color-pickerPopup">
@@ -1223,6 +1238,31 @@ var readFile = function(e) {
         canvas.renderAll(); 
     }
 /** Layout Module Function End**/
+    function openNav() {
+    var fontList = '';
+    var fontoption = '';
+    var j = 0;
+    $('#fonts-dropdown-wrapper').empty();
+    
+    banvas=canvas;
+    for(var i = 0; i < gfonts.length; i++) {
+        var text = canvas.getActiveObject();
+      
+        // imgList = `<div  class="col-md-6"><div class="font-wrapper"> <img data-font="${gfonts[i]}" class="fontname" src="${imgData}"/></div></div>`;
+        // imgList = `<div class="col-md-4 mb-4 text-center"> <div class="font-wrapper"><img data-font="${gfonts[i]}" class="fontname img-responsive" src="${imgData}"  ></div> <p><small>${gfonts[i]}</small></p></div>`;
+        fontList = `<div class="col-lg-12 mt-3 p-0 single-font-wrapper"><p class="mb-1">${gfonts[i]}</p> <div class="font-names" data-font="${gfonts[i]}" style="font-family: ${gfonts[i]};">${text.text}</div> </div>`;
+        $('#fonts-dropdown-wrapper').append(fontList);
+    }
+        document.getElementById("seeoption-div").style.width = "100%";
+
+        //document.getElementById("main").style.marginLeft = "250px";
+      }
+      
+      /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+      function closeNav() {
+        document.getElementById("seeoption-div").style.width = "0";
+       // document.getElementById("main").style.marginLeft = "0";
+      }
 </script>
 @endsection
 @endsection
